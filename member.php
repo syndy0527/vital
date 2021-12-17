@@ -13,7 +13,7 @@ try {
     exit();
 }
 
-$sql = 'SELECT * FROM member_table ORDER BY ID ASC';
+$sql = 'SELECT * FROM member_table ORDER BY memberID ASC';
 
 $stmt = $pdo->prepare($sql);
 
@@ -33,7 +33,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // exit();
 $output = "";
 foreach ($result as $record) {
-    $output .= "<tr><td>{$record['ID']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td>><tr>";
+    $output .= "<tr><td>{$record['memberID']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td>><tr>";
 }
 
 ?>

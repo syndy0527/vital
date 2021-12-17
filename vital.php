@@ -13,10 +13,12 @@ try {
     exit();
 }
 
-$sql = 'SELECT * FROM member_table';
+$sql = 'SELECT * FROM member_table ORDER BY memberID ASC';
 
 $stmt = $pdo->prepare($sql);
 
+
+// SQL実行（実行に失敗すると `sql error ...` が出力される）
 try {
     $status = $stmt->execute();
 } catch (PDOException $e) {
@@ -24,15 +26,20 @@ try {
     exit();
 }
 
-$member = $stmt->fetch(PDO::FETCH_ASSOC);
-var_dump($member);
-exit();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// echo '<pre>';
+// var_dump($result);
+// echo '<pre>';
+// exit();
 
-foreach ($member as $member_key) {
-    $member .=
-        "<option value='" . $member_key['memberID'];
+foreach ($result as $member_key) {
+    //     $member = "<option value='" . $member_key['memberID'];
+    //     "'>" . $member_key['mbname'] . "</option>";
+    $member .= "<option value='" . $member_key['memberID'];
     $member .= "'>" . $member_key['mbname'] . "</option>";
 }
+// var_dump($member);
+// exit();
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +58,7 @@ foreach ($member as $member_key) {
             <legend>バイタルデータ入力</legend>
             <div>
                 会員番号：<select name="member_id">
-                    <?php echo $member_key; ?>
+                    <?php echo $member; ?>
                 </select>
             </div>
             <div>

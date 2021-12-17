@@ -1,5 +1,7 @@
 <?php
+// echo '<pre>';
 // var_dump($_POST);
+// echo '<pre>';
 // exit();
 
 if (
@@ -29,7 +31,7 @@ try {
     exit();
 }
 
-$sql = 'INSERT INTO member(id,mbname,seibetu,barthday,mbaddress)VALUES(NULL,:mbname,:seibetu,:barthday,:mbaddress)';
+$sql = 'INSERT INTO member_table(memberID,mbname,seibetu,barthday,mbaddress)VALUES(NULL,:mbname,:seibetu,:barthday,:mbaddress)';
 
 $stmt = $pdo->prepare($sql);
 
