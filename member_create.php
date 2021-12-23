@@ -19,19 +19,13 @@ $barthday = $_POST['barthday'];
 $address = $_POST['address'];
 
 // 各種項目設定
-$dbn = 'mysql:dbname=sotusei_07;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+include('functions.php');
 
 // DB接続
-try {
-    $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo json_encode(["db error" => "{$e->getMessage()}"]);
-    exit();
-}
+$pdo = connect_to_db();
 
-$sql = 'INSERT INTO member_table(memberID,mbname,seibetu,barthday,mbaddress)VALUES(NULL,:mbname,:seibetu,:barthday,:mbaddress)';
+
+$sql = 'INSERT INTO member_table(memberID,mbname,seibetu,barthday,mbaddress,created_at,update_at)VALUES(NULL,:mbname,:seibetu,:barthday,:mbaddress,NOW(),NOW())';
 
 $stmt = $pdo->prepare($sql);
 

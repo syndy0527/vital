@@ -1,17 +1,11 @@
 <?php
 // DB接続
 // 各種項目設定
-$dbn = 'mysql:dbname=sotusei_07;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+include('functions.php');
 
 // DB接続
-try {
-    $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo json_encode(["db error" => "{$e->getMessage()}"]);
-    exit();
-}
+$pdo = connect_to_db();
+
 
 $sql = 'SELECT * FROM member_table ORDER BY memberID ASC';
 
@@ -32,11 +26,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // echo '<pre>';
 // exit();
 
-foreach ($result as $member_key) {
+$result_list = "";
+
+foreach ($result as $result_key) {
     //     $member = "<option value='" . $member_key['memberID'];
     //     "'>" . $member_key['mbname'] . "</option>";
-    $member .= "<option value='" . $member_key['memberID'];
-    $member .= "'>" . $member_key['mbname'] . "</option>";
+    // $member .= "<option value='" . $member_key['memberID'];
+    // $member .= "'>" . $member_key['mbname'] . "</option>";
+    $result_list .= "<option value='" . $result_key['memberID'] . "'>" . $result_key['mbname'] . "</option>";
 }
 // var_dump($member);
 // exit();
@@ -57,8 +54,8 @@ foreach ($result as $member_key) {
         <fieldset>
             <legend>バイタルデータ入力</legend>
             <div>
-                会員番号：<select name="member_id">
-                    <?php echo $member; ?>
+                会員名：<select name="member_id">
+                    <?php echo $result_list; ?>
                 </select>
             </div>
             <div>

@@ -17,17 +17,11 @@ $taion = $_POST['taion'];
 $ketuatu_up = $_POST['ketuatu_up'];
 $ketuatu_down = $_POST['ketuatu_down'];
 // 各種項目設定
-$dbn = 'mysql:dbname=sotusei_07;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+include('functions.php');
 
 // DB接続
-try {
-    $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo json_encode(["db error" => "{$e->getMessage()}"]);
-    exit();
-}
+$pdo = connect_to_db();
+
 
 $sql = 'INSERT INTO vital_table(id,member_id,record_date,taion,ketuatu_up,ketuatu_down)VALUES(NULL,:member_id,:record_date,:taion,:ketuatu_up,:ketuatu_down)';
 
