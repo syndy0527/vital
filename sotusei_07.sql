@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2021-12-16 09:36:35
+-- 生成日時: 2021-12-23 23:08:00
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -72,19 +72,19 @@ CREATE TABLE `member_table` (
   `mbname` varchar(128) COLLATE utf8_bin NOT NULL,
   `seibetu` varchar(64) COLLATE utf8_bin NOT NULL,
   `barthday` date NOT NULL,
-  `mbaddress` varchar(128) COLLATE utf8_bin NOT NULL
+  `mbaddress` varchar(128) COLLATE utf8_bin NOT NULL,
+  `created_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- テーブルのデータのダンプ `member_table`
 --
 
-INSERT INTO `member_table` (`memberID`, `mbname`, `seibetu`, `barthday`, `mbaddress`) VALUES
-(1, '田中　新治', '男', '1975-05-27', '防府市高井'),
-(2, '田中　奏大', '男', '1975-05-27', '防府市高井'),
-(3, '田中　史奈', '女', '2015-06-25', '山口県防府市高井'),
-(4, '幾田　りら', '女', '2001-05-19', '東京都杉並区'),
-(5, '浅川　結', '女', '1996-02-19', '大阪府大阪市');
+INSERT INTO `member_table` (`memberID`, `mbname`, `seibetu`, `barthday`, `mbaddress`, `created_at`, `update_at`) VALUES
+(13, '田中　新治', '男', '1975-05-27', '山口県防府市高井６６６', '2021-12-23 00:40:11', '2021-12-23 00:46:48'),
+(14, '田中　菜々子', '女', '2004-05-19', '佐賀県佐賀市', '2021-12-23 00:40:45', '2021-12-23 00:40:45'),
+(16, '田中　奏大', '男', '2006-01-11', '山口市秋穂二島', '2021-12-23 00:41:35', '2021-12-23 00:41:35');
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,10 @@ CREATE TABLE `vital_table` (
 
 INSERT INTO `vital_table` (`ID`, `member_ID`, `record_date`, `taion`, `ketuatu_up`, `ketuatu_down`) VALUES
 (1, 1, '2021-12-15', 37, 98, 58),
-(2, 1, '2021-12-15', 37, 98, 58);
+(2, 1, '2021-12-15', 37, 98, 58),
+(3, 1, '2021-12-18', 37, 98, 60),
+(4, 4, '2021-12-20', 36, 98, 69),
+(5, 8, '2021-12-21', 37, 100, 60);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -198,7 +201,7 @@ ALTER TABLE `medical_tabal`
 -- テーブルの AUTO_INCREMENT `member_table`
 --
 ALTER TABLE `member_table`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- テーブルの AUTO_INCREMENT `setai_table`
@@ -216,7 +219,7 @@ ALTER TABLE `sinzoku_table`
 -- テーブルの AUTO_INCREMENT `vital_table`
 --
 ALTER TABLE `vital_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
