@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2021-12-23 23:08:00
+-- 生成日時: 2022-01-12 19:01:17
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -49,6 +49,20 @@ INSERT INTO `kaigonitei_id` (`ID`, `kaiganitei`) VALUES
 -- --------------------------------------------------------
 
 --
+-- テーブルの構造 `kihon_table`
+--
+
+CREATE TABLE `kihon_table` (
+  `ID` int(11) NOT NULL,
+  `member_ID` int(11) NOT NULL,
+  `性別` varchar(64) COLLATE utf8_bin NOT NULL,
+  `生年月日` date NOT NULL,
+  `住所` varchar(128) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- テーブルの構造 `medical_tabal`
 --
 
@@ -70,6 +84,10 @@ CREATE TABLE `medical_tabal` (
 CREATE TABLE `member_table` (
   `memberID` int(11) NOT NULL,
   `mbname` varchar(128) COLLATE utf8_bin NOT NULL,
+  `loginID` varchar(128) COLLATE utf8_bin NOT NULL,
+  `password` varchar(128) COLLATE utf8_bin NOT NULL,
+  `is_admin` int(1) NOT NULL,
+  `is_dalete` int(1) NOT NULL,
   `seibetu` varchar(64) COLLATE utf8_bin NOT NULL,
   `barthday` date NOT NULL,
   `mbaddress` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -81,10 +99,12 @@ CREATE TABLE `member_table` (
 -- テーブルのデータのダンプ `member_table`
 --
 
-INSERT INTO `member_table` (`memberID`, `mbname`, `seibetu`, `barthday`, `mbaddress`, `created_at`, `update_at`) VALUES
-(13, '田中　新治', '男', '1975-05-27', '山口県防府市高井６６６', '2021-12-23 00:40:11', '2021-12-23 00:46:48'),
-(14, '田中　菜々子', '女', '2004-05-19', '佐賀県佐賀市', '2021-12-23 00:40:45', '2021-12-23 00:40:45'),
-(16, '田中　奏大', '男', '2006-01-11', '山口市秋穂二島', '2021-12-23 00:41:35', '2021-12-23 00:41:35');
+INSERT INTO `member_table` (`memberID`, `mbname`, `loginID`, `password`, `is_admin`, `is_dalete`, `seibetu`, `barthday`, `mbaddress`, `created_at`, `update_at`) VALUES
+(13, '田中　新治', '0', '0', 2, 0, '男', '1975-05-27', '山口県防府市高井６６６', '2021-12-23 00:40:11', '2022-01-11 00:23:37'),
+(16, '田中　奏大', '0', '0', 0, 0, '男', '2006-01-11', '山口市秋穂二島', '2021-12-23 00:41:35', '2021-12-23 00:41:35'),
+(21, '田中　菜々子', 'nata', '777777', 0, 0, '女', '2022-05-19', '佐賀県佐賀市666', '2022-01-10 11:31:15', '2022-01-10 15:58:02'),
+(22, '幾田　りら', 'rira', '111111', 1, 0, '0', '0000-00-00', '0', '2022-01-10 14:10:05', '2022-01-10 14:10:05'),
+(23, '松木　玖生', 'matu', '101010', 2, 0, '0', '0000-00-00', '0', '2022-01-10 21:35:10', '2022-01-10 21:35:10');
 
 -- --------------------------------------------------------
 
@@ -127,19 +147,20 @@ CREATE TABLE `vital_table` (
   `record_date` date NOT NULL,
   `taion` int(11) NOT NULL,
   `ketuatu_up` int(11) NOT NULL,
-  `ketuatu_down` int(11) NOT NULL
+  `ketuatu_down` int(11) NOT NULL,
+  `myakuhaku` int(11) NOT NULL,
+  `wight` int(11) NOT NULL,
+  `suibun` int(11) NOT NULL,
+  `fukuyaku` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- テーブルのデータのダンプ `vital_table`
 --
 
-INSERT INTO `vital_table` (`ID`, `member_ID`, `record_date`, `taion`, `ketuatu_up`, `ketuatu_down`) VALUES
-(1, 1, '2021-12-15', 37, 98, 58),
-(2, 1, '2021-12-15', 37, 98, 58),
-(3, 1, '2021-12-18', 37, 98, 60),
-(4, 4, '2021-12-20', 36, 98, 69),
-(5, 8, '2021-12-21', 37, 100, 60);
+INSERT INTO `vital_table` (`ID`, `member_ID`, `record_date`, `taion`, `ketuatu_up`, `ketuatu_down`, `myakuhaku`, `wight`, `suibun`, `fukuyaku`) VALUES
+(6, 16, '2021-12-26', 37, 99, 55, 70, 54, 1000, 1),
+(7, 21, '2022-01-13', 36, 70, 55, 70, 55, 1000, 1);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -149,6 +170,12 @@ INSERT INTO `vital_table` (`ID`, `member_ID`, `record_date`, `taion`, `ketuatu_u
 -- テーブルのインデックス `kaigonitei_id`
 --
 ALTER TABLE `kaigonitei_id`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- テーブルのインデックス `kihon_table`
+--
+ALTER TABLE `kihon_table`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -192,6 +219,12 @@ ALTER TABLE `kaigonitei_id`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- テーブルの AUTO_INCREMENT `kihon_table`
+--
+ALTER TABLE `kihon_table`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- テーブルの AUTO_INCREMENT `medical_tabal`
 --
 ALTER TABLE `medical_tabal`
@@ -201,7 +234,7 @@ ALTER TABLE `medical_tabal`
 -- テーブルの AUTO_INCREMENT `member_table`
 --
 ALTER TABLE `member_table`
-  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `memberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- テーブルの AUTO_INCREMENT `setai_table`
@@ -219,7 +252,7 @@ ALTER TABLE `sinzoku_table`
 -- テーブルの AUTO_INCREMENT `vital_table`
 --
 ALTER TABLE `vital_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

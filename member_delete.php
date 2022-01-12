@@ -5,6 +5,8 @@
 $id = $_GET['id'];
 // DB接続
 include('functions.php');
+session_start();
+check_session_id();
 $pdo = connect_to_db();
 // SQL実行
 $sql = 'DELETE FROM member_table WHERE memberID=:id';

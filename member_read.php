@@ -2,6 +2,8 @@
 // DB接続
 // 各種項目設定
 include('functions.php');
+session_start();
+check_session_id();
 
 // DB接続
 $pdo = connect_to_db();
@@ -27,7 +29,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // exit();
 $output = "";
 foreach ($result as $record) {
-    $output .= "<tr><td>{$record['memberID']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td><td>
+    $output .= "<tr><td>{$record['memberID']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td><td>{$record['is_admin']}</td><td>{$record['is_dalete']}</td>
+    <td>
         <a href='member_edit.php?id={$record["memberID"]}'>edit</a>
       </td>
       <td>
@@ -49,7 +52,7 @@ foreach ($result as $record) {
 <body>
     <fieldset>
         <legend>会員一覧</legend>
-        <a href="member.php">登録画面</a>
+        <a href="admin_home.php">管理者ホームへ</a>
         <table border="1">
             <thead>
                 <tr>
@@ -58,7 +61,9 @@ foreach ($result as $record) {
                     <th>性別</th>
                     <th>生年月日</th>
                     <th>住所</th>
-                    <th>住所変更</th>
+                    <th>利用者区分</th>
+                    <th>停止区分</th>
+                    <th>変更</th>
                     <th>削除</th>
                 </tr>
             </thead>
