@@ -32,7 +32,7 @@ foreach ($val as $record) {
     } else if ($record['fukuyaku'] == 2) {
         $fukuyaku .= "飲んでない";
     };
-    $output .= "<tr><td>{$record['record_date']}</td><td>{$record['taion']}℃</td><td>{$record['ketuatu_up']}/{$record['ketuatu_down']}</td><td>{$record['myakuhaku']}</td><td>{$record['wight']}</td><td>{$record['suibun']}</td><td>{$fukuyaku}</td>";
+    $output .= "<tr><td>{$record['record_date']}</td><td>{$record['taion']}℃</td><td>{$record['ketuatu_up']}/{$record['ketuatu_down']}</td><td>{$record['myakuhaku']}</td><td>{$record['wight']}</td><td>{$record['suibun']}</td><td>{$fukuyaku}</td></tr>";
 }
 ?>
 <!DOCTYPE html>

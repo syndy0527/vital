@@ -2,7 +2,7 @@
 include('functions.php');
 session_start();
 check_session_id();
-$memberid = $_SESSION['member_id'];
+$id = $_SESSION['member_id'];
 $pdo = connect_to_db();
 
 $sql = "SELECT * FROM kaigonintei_table ORDER BY kaigonintei_id ASC";
@@ -37,6 +37,44 @@ foreach ($shougai as $val) {
     // exit();
     $output1 .= "<option value='{$val['shougai_id']}'>{$val['shougai']}</option>";
 };
+$sql = 'SELECT result1_table.member_id,result1_table.mbname,result1_table.support_id,result1_table.support, result1_table.belongs_id,belongs_table.belongs FROM(SELECT result_table.member_id,result_table.mbname,result_table.support_id,support_table.support, result_table.belongs_id FROM(SELECT member_table.member_id,mbname,support_id,belongs_id FROM `member_table` LEFT OUTER JOIN supporter_table ON member_table.member_id=supporter_table.member_id WHERE support_id=3) AS result_table LEFT OUTER JOIN support_table ON result_table.support_id=support_table.support_id) AS result1_table LEFT OUTER JOIN belongs_table ON result1_table.belongs_id=belongs_table.belongs_id ';
+$stmt = $pdo->prepare($sql);
+try {
+    $status = $stmt->execute();
+} catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+}
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// echo '<pre>';
+// var_dump($result);
+// echo '<pre>';
+// exit();
+$output2 = "";
+foreach ($result as $record2) {
+    // var_dump($record2["support"]);
+    // exit();
+    $output2 .= "<option value='{$record2['member_id']}'>{$record2['belongs']} / {$record2['mbname']}</option>";
+}
+$sql = 'SELECT result1_table.member_id,result1_table.mbname,result1_table.support_id,result1_table.support, result1_table.belongs_id,belongs_table.belongs FROM(SELECT result_table.member_id,result_table.mbname,result_table.support_id,support_table.support, result_table.belongs_id FROM(SELECT member_table.member_id,mbname,support_id,belongs_id FROM `member_table` LEFT OUTER JOIN supporter_table ON member_table.member_id=supporter_table.member_id WHERE support_id=4) AS result_table LEFT OUTER JOIN support_table ON result_table.support_id=support_table.support_id) AS result1_table LEFT OUTER JOIN belongs_table ON result1_table.belongs_id=belongs_table.belongs_id ';
+$stmt = $pdo->prepare($sql);
+try {
+    $status = $stmt->execute();
+} catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+}
+$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// echo '<pre>';
+// var_dump($result);
+// echo '<pre>';
+// exit();
+$output3 = "";
+foreach ($result1 as $record3) {
+    // var_dump($record2["support"]);
+    // exit();
+    $output3 .= "<option value='{$record3['member_id']}'>{$record3['belongs']} / {$record3['mbname']}</option>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -67,14 +105,18 @@ foreach ($shougai as $val) {
                 </select>
             </div>
             <div>
-                ケアマネジャー: <input type="text" name="caremane">
+                ケアマネジャー: <select name="caremane" id="">
+                    <?= $output2 ?>
+                </select>
             </div>
             <div>
-                かかりつけ医師: <input type="text" name="caredoc">
+                かかりつけ医師: <select name="pcd" id="">
+                    <?= $output3 ?>
+                </select>
             </div>
             </div>
 
-            <input type="hidden" name="id" value="<?= $memberid ?>">
+            <input type="hidden" name="id" value="<?= $id ?>">
             <div>
                 <button>submit</button>
             </div>

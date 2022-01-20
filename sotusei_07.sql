@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2022-01-20 15:37:56
+-- 生成日時: 2022-01-20 17:59:18
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -72,17 +72,26 @@ INSERT INTO `kaigonintei_table` (`id`, `kaigonintei_id`, `kaigonintei`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `medical_tabal`
+-- テーブルの構造 `medical_table`
 --
 
-CREATE TABLE `medical_tabal` (
+CREATE TABLE `medical_table` (
   `id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `kaigonintei_id` int(11) NOT NULL,
   `shougainintei_id` int(11) NOT NULL,
-  `caremana` varchar(128) COLLATE utf8_bin NOT NULL,
-  `caredocter` varchar(128) COLLATE utf8_bin NOT NULL
+  `caremane` int(11) NOT NULL,
+  `caredocter` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- テーブルのデータのダンプ `medical_table`
+--
+
+INSERT INTO `medical_table` (`id`, `member_id`, `kaigonintei_id`, `shougainintei_id`, `caremane`, `caredocter`, `created_at`, `update_at`) VALUES
+(1, 21, 1, 2, 22, 27, '2022-01-21 01:35:36', '2022-01-21 01:35:36');
 
 -- --------------------------------------------------------
 
@@ -114,9 +123,9 @@ INSERT INTO `member_table` (`member_id`, `mbname`, `login_id`, `password`, `is_a
 (21, '田中　菜々子', 'nata', '777777', 0, 0, '女', '2022-05-19', '佐賀県佐賀市666', '2022-01-10 11:31:15', '2022-01-10 15:58:02'),
 (22, '幾田　りら', 'rira', '111111', 1, 0, '0', '0000-00-00', '東京都港区', '2022-01-10 14:10:05', '2022-01-16 14:54:40'),
 (23, '松木　玖生', 'matu', '101010', 2, 0, '0', '0000-00-00', '0', '2022-01-10 21:35:10', '2022-01-10 21:35:10'),
-(24, '浅川　結', 'tata', '222222', 0, 0, '女', '2022-01-05', '山口市秋穂', '2022-01-15 12:03:58', '2022-01-15 12:04:40'),
+(24, '浅川　結', 'tata', '222222', 1, 0, '女', '2022-01-05', '山口市秋穂', '2022-01-15 12:03:58', '2022-01-15 12:04:40'),
 (26, '田中　史奈', 'nana', '222222', 0, 0, '女', '2021-12-29', '山口県防府市高井', '2022-01-15 13:15:19', '2022-01-15 13:16:02'),
-(27, '武豊', 'take', '111111', 0, 0, '0', '0000-00-00', '0', '2022-01-16 14:56:00', '2022-01-16 14:56:00');
+(27, '武豊', 'take', '111111', 1, 0, '0', '0000-00-00', '0', '2022-01-16 14:56:00', '2022-01-16 14:56:00');
 
 -- --------------------------------------------------------
 
@@ -206,6 +215,15 @@ CREATE TABLE `supporter_table` (
   `update_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- テーブルのデータのダンプ `supporter_table`
+--
+
+INSERT INTO `supporter_table` (`ID`, `member_id`, `support_id`, `belongs_id`, `created_at`, `update_at`) VALUES
+(1, 22, 3, 1, '2022-01-21 00:02:06', '2022-01-21 00:02:06'),
+(3, 24, 3, 3, '2022-01-21 00:59:47', '2022-01-21 00:59:47'),
+(4, 27, 4, 1, '2022-01-21 01:10:44', '2022-01-21 01:10:44');
+
 -- --------------------------------------------------------
 
 --
@@ -278,9 +296,9 @@ ALTER TABLE `kaigonintei_table`
   ADD PRIMARY KEY (`id`);
 
 --
--- テーブルのインデックス `medical_tabal`
+-- テーブルのインデックス `medical_table`
 --
-ALTER TABLE `medical_tabal`
+ALTER TABLE `medical_table`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -342,10 +360,10 @@ ALTER TABLE `kaigonintei_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- テーブルの AUTO_INCREMENT `medical_tabal`
+-- テーブルの AUTO_INCREMENT `medical_table`
 --
-ALTER TABLE `medical_tabal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `medical_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- テーブルの AUTO_INCREMENT `member_table`
@@ -375,7 +393,7 @@ ALTER TABLE `sinzoku_table`
 -- テーブルの AUTO_INCREMENT `supporter_table`
 --
 ALTER TABLE `supporter_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- テーブルの AUTO_INCREMENT `support_table`

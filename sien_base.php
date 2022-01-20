@@ -4,6 +4,8 @@ session_start();
 check_session_id();
 
 $id = $_SESSION['member_id'];
+// var_dump($id);
+// exit();
 $pdo = connect_to_db();
 $sql = 'SELECT * FROM member_table WHERE is_admin=1';
 
@@ -54,8 +56,9 @@ foreach ($belongs as $record1) {
     // exit();
     $output1 .= "<option value='{$record1['belongs_id']}'>{$record1['belongs']}</option>";
 }
-$sql = 'SELECT result1_table.member_id,result1_table.mbname,result1_table.support_id,result1_table.support, result1_table.belongs_id,belongs_table.belongs FROM(SELECT result_table.member_id,result_table.mbname,result_table.support_id,support_table.support, result_table.belongs_id FROM(SELECT member_table.member_id,mbname,support_id,belongs_id FROM `member_table` LEFT OUTER JOIN supporter_table ON member_table.member_id=supporter_table.member_id) AS result_table LEFT OUTER JOIN support_table ON result_table.support_id=support_table.support_id) AS result1_table LEFT OUTER JOIN belongs_table ON result1_table.belongs_id=belongs_table.belongs_id';
+$sql = 'SELECT result1_table.member_id,result1_table.mbname,result1_table.support_id,result1_table.support, result1_table.belongs_id,belongs_table.belongs FROM(SELECT result_table.member_id,result_table.mbname,result_table.support_id,support_table.support, result_table.belongs_id FROM(SELECT member_table.member_id,mbname,support_id,belongs_id FROM `member_table` LEFT OUTER JOIN supporter_table ON member_table.member_id=supporter_table.member_id WHERE member_table.member_id=:id) AS result_table LEFT OUTER JOIN support_table ON result_table.support_id=support_table.support_id) AS result1_table LEFT OUTER JOIN belongs_table ON result1_table.belongs_id=belongs_table.belongs_id ';
 $stmt = $pdo->prepare($sql);
+$stmt->bindValue(':id', $id, PDO::PARAM_STR);
 try {
     $status = $stmt->execute();
 } catch (PDOException $e) {
@@ -71,6 +74,7 @@ $output2 = "";
 foreach ($result as $record2) {
     // var_dump($record2["support"]);
     // exit();
+    $output2 .= "<p> 登録状況：{$record2["support"]}</p>";
 }
 ?>
 <!DOCTYPE html>
@@ -94,7 +98,7 @@ foreach ($result as $record2) {
                 支援区分：<select name="sienkubun">
                     <?= $output ?>
                 </select>
-                <p> 登録状況：<?= $record2["support"] ?></p>
+                <?= $output2  ?>
             </div>
             <div>
                 所属：<select name="belongs">
@@ -108,7 +112,7 @@ foreach ($result as $record2) {
             </div>
             <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
             <div>
-                <a href="member_home.php"> ホーム画面へ</a>
+                <a href="sien_home.php"> ホーム画面へ</a>
         </fieldset>
 
 
