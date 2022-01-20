@@ -29,7 +29,7 @@ check_session_id();
 $pdo = connect_to_db();
 
 
-$sql = 'UPDATE member_table SET memberID=:id,seibetu=:seibetu,barthday=:barthday,mbaddress=:mbaddress,update_at=NOW() WHERE memberID=:id';
+$sql = 'UPDATE member_table SET member_id=:id,seibetu=:seibetu,barthday=:barthday,mbaddress=:mbaddress,update_at=NOW() WHERE member_id=:id';
 
 $stmt = $pdo->prepare($sql);
 

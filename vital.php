@@ -79,7 +79,7 @@ check_session_id();
                 服薬：<label><input type="radio" name="fukuyaku" value="1">飲んだ</label> <label><input type="radio" name="fukuyaku" value="2">飲んでない</label>
             </div>
 
-            <input type="hidden" name="id" value="<?= $_SESSION['memberID']  ?>">
+            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
             <div>
                 <button>submit</button>
             </div>

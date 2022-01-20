@@ -9,7 +9,7 @@ session_start();
 check_session_id();
 $pdo = connect_to_db();
 // SQL実行
-$sql = 'DELETE FROM member_table WHERE memberID=:id';
+$sql = 'DELETE FROM member_table WHERE member_id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);

@@ -11,7 +11,7 @@ $password = $_POST['password'];
 $pdo = connect_to_db();
 
 // username，password，is_deletedの3項目全てを満たすデータを抽出する．
-$sql = 'SELECT * FROM member_table WHERE loginID=:logid AND password=:password AND is_dalete=0';
+$sql = 'SELECT * FROM member_table WHERE login_id=:logid AND password=:password AND is_dalete=0';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':logid', $logid, PDO::PARAM_STR);
@@ -36,7 +36,7 @@ if (!$val) {
     $_SESSION['session_id'] = session_id();
     $_SESSION['is_admin'] = $val['is_admin'];
     $_SESSION['mbname'] = $val['mbname'];
-    $_SESSION['memberID'] = $val['memberID'];
+    $_SESSION['member_id'] = $val['member_id'];
 
     if ($val['is_admin'] == 1) {
         header("Location:sien_home.php");

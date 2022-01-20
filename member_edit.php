@@ -10,7 +10,7 @@ session_start();
 check_session_id();
 $pdo = connect_to_db();
 // SQL実行
-$sql = 'SELECT * FROM member_table WHERE memberId=:id';
+$sql = 'SELECT * FROM member_table WHERE member_id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -60,7 +60,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
                 </select>
                 <p> 登録状況：<span id="delete"></span></p>
             </div>
-            <input type="hidden" name="id" value="<?= $record["memberID"] ?>">
+            <input type="hidden" name="id" value="<?= $record["member_id"] ?>">
             <div>
                 <button>submit</button>
             </div>

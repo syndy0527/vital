@@ -24,7 +24,7 @@ check_session_id();
         <p>ー 健康チェック ー</p>
     </div>
     <div>
-        <a class="button">健康情報をみる</a>
+        <a class="button" href="vital_read.php">健康情報をみる</a>
     </div>
     <div>
         <a class="button" href="vital.php">健康情報を入力する</a>

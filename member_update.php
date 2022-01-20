@@ -19,7 +19,7 @@ $id = $_POST['id'];
 include('functions.php');
 $pdo = connect_to_db();
 
-$sql = 'UPDATE member_table SET  mbaddress=:mbadd, memberID=:id,is_admin=:admin,is_dalete=:delete,update_at=now() WHERE memberID=:id';
+$sql = 'UPDATE member_table SET  mbaddress=:mbadd, member_id=:id,is_admin=:admin,is_dalete=:delete,update_at=now() WHERE member_id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':mbadd', $add, PDO::PARAM_STR);

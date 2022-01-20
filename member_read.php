@@ -9,7 +9,7 @@ check_session_id();
 $pdo = connect_to_db();
 
 
-$sql = 'SELECT * FROM member_table ORDER BY memberID ASC';
+$sql = 'SELECT * FROM member_table ORDER BY member_id ASC';
 
 $stmt = $pdo->prepare($sql);
 
@@ -29,12 +29,12 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // exit();
 $output = "";
 foreach ($result as $record) {
-    $output .= "<tr><td>{$record['memberID']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td><td>{$record['is_admin']}</td><td>{$record['is_dalete']}</td>
+    $output .= "<tr><td>{$record['member_id']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td><td>{$record['is_admin']}</td><td>{$record['is_dalete']}</td>
     <td>
-        <a href='member_edit.php?id={$record["memberID"]}'>edit</a>
+        <a href='member_edit.php?id={$record["member_id"]}'>edit</a>
       </td>
       <td>
-        <a href='member_delete.php?id={$record["memberID"]}'>delete</a>
+        <a href='member_delete.php?id={$record["member_id"]}'>delete</a>
       </td><tr>";
 }
 ?>

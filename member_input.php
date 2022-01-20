@@ -27,12 +27,12 @@ check_session_id();
         <a class="button" href="member.php">基本情報</a>
     </div>
     <div>
-        <a class="button">親族情報</a>
+        <a class="button" href="member_sinzoku.php">親族情報</a>
     </div>
     <div>
-        <a class="button">医療情報</a>
+        <a class="button" href="member_medical.php">医療情報</a>
     </div>
-    <p><a href="member_home.php">ホーム画面へ</a></p>
+    <p><a href=" member_home.php">ホーム画面へ</a></p>
 
 </body>
 

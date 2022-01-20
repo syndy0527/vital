@@ -16,7 +16,7 @@ $password = $_POST["password"];
 include('functions.php');
 $pdo = connect_to_db();
 
-$sql = 'SELECT count(*) FROM member_table WHERE loginID=:logid';
+$sql = 'SELECT count(*) FROM member_table WHERE login_id=:logid';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':logid', $logid, PDO::PARAM_STR);
@@ -34,7 +34,7 @@ if ($stmt->fetchColumn() > 0) {
     exit();
 } else {
 
-    $sql = 'INSERT INTO member_table(memberID,mbname,loginID,password,is_admin,is_dalete,seibetu,barthday,mbaddress,created_at,update_at)VALUES(NULL,:mbname ,:logid, :password,0, 0,0,0,0, now(), now())';
+    $sql = 'INSERT INTO member_table(member_id,mbname,login_id,password,is_admin,is_dalete,seibetu,barthday,mbaddress,created_at,update_at)VALUES(NULL,:mbname ,:logid, :password,0, 0,0,0,0, now(), now())';
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':mbname', $mbname, PDO::PARAM_STR);

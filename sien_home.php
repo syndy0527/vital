@@ -29,6 +29,9 @@ check_session_id();
     <div>
         <a class="button">見守り情報入力</a>
     </div>
+    <div>
+        <a class="button" href="sien_base.php">支援者基本情報入力</a>
+    </div>
     <p><a href="logout.php">ログアウト</a></p>
 </body>
 

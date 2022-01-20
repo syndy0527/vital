@@ -3,9 +3,9 @@ include("functions.php");
 session_start();
 check_session_id();
 
-$id = $_SESSION['memberID'];
+$id = $_SESSION['member_id'];
 $pdo = connect_to_db();
-$sql = 'SELECT * FROM member_table WHERE memberId=:id';
+$sql = 'SELECT * FROM member_table WHERE member_id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -56,7 +56,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
                 <button>submit</button>
             </div>
             </div>
-            <input type="hidden" name="id" value="<?= $_SESSION['memberID']  ?>">
+            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
             <div>
                 <a href="member_home.php"> ホーム画面へ</a>
         </fieldset>
