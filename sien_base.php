@@ -90,7 +90,7 @@ foreach ($result as $record2) {
 <body>
     <form action="sien_create.php" method="POST">
         <fieldset>
-            <legend>支援者基本情報登録</legend>
+            <legend>支援者基本情報登録・変更</legend>
             <div>
                 <P>氏名：<?= $_SESSION['mbname'] ?></P>
             </div>

@@ -26,8 +26,26 @@ check_session_id();
 
 // DB接続
 $pdo = connect_to_db();
+$sql = 'SELECT*FROM medical_table WHERE member_id=:id';
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+try {
+    $status = $stmt->execute();
+} catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+}
+$val = $stmt->fetch(PDO::FETCH_ASSOC);
+// var_dump($val["member_id"]);
+// exit();
 
-$sql = 'INSERT INTO medical_table(id,member_id,kaigonintei_id,shougainintei_id,caremane,caredocter,created_at,update_at)VALUES(NULL,:id,:kaigonintei ,:shougai,:caremane,:pcd,now(), now())';
+if ($val["member_id"] == NULL) {
+    $sql = 'INSERT INTO medical_table(id,member_id,kaigonintei_id,shougainintei_id,caremane,caredocter,created_at,update_at)VALUES(NULL,:id,:kaigonintei ,:shougai,:caremane,:pcd,now(), now())';
+} else {
+    $sql
+        = 'UPDATE medical_table SET  kaigonintei_id=:kaigonintei, shougainintei_id=:shougai,caremane=:caremane,caredocter=:pcd,update_at=now() WHERE member_id=:id';
+}
+
 
 $stmt = $pdo->prepare($sql);
 
