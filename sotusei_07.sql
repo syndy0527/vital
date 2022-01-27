@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2022-01-20 17:59:18
+-- 生成日時: 2022-01-27 14:28:41
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -42,6 +42,50 @@ INSERT INTO `belongs_table` (`id`, `belongs_id`, `belongs`) VALUES
 (2, 1, '田中クリニック'),
 (3, 2, 'デイサービス田中'),
 (4, 3, '訪問介護たなか');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `communicate_table`
+--
+
+CREATE TABLE `communicate_table` (
+  `id` int(11) NOT NULL,
+  `send_member_id` int(11) NOT NULL,
+  `text` varchar(128) COLLATE utf8_bin NOT NULL,
+  `image` varchar(128) COLLATE utf8_bin NOT NULL,
+  `recieve_member_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- テーブルのデータのダンプ `communicate_table`
+--
+
+INSERT INTO `communicate_table` (`id`, `send_member_id`, `text`, `image`, `recieve_member_id`, `created_at`) VALUES
+(5, 21, '元気ですかー', 'upload/20220127134021501533dd3603b413001140dfc609f6ee.jpg', 16, '2022-01-27 21:40:21'),
+(6, 21, '元気ですよー', 'upload/20220127134055050199afb758b42bb1ab75a1ec43e061.jpg', 26, '2022-01-27 21:40:55');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `friend_table`
+--
+
+CREATE TABLE `friend_table` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
+  `friend_check` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- テーブルのデータのダンプ `friend_table`
+--
+
+INSERT INTO `friend_table` (`id`, `member_id`, `friend_id`, `friend_check`) VALUES
+(11, 21, 16, 1),
+(12, 21, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +135,7 @@ CREATE TABLE `medical_table` (
 --
 
 INSERT INTO `medical_table` (`id`, `member_id`, `kaigonintei_id`, `shougainintei_id`, `caremane`, `caredocter`, `created_at`, `update_at`) VALUES
-(1, 21, 1, 2, 22, 27, '2022-01-21 01:35:36', '2022-01-21 01:35:36');
+(1, 21, 2, 16, 24, 27, '2022-01-21 01:35:36', '2022-01-22 13:01:03');
 
 -- --------------------------------------------------------
 
@@ -220,9 +264,9 @@ CREATE TABLE `supporter_table` (
 --
 
 INSERT INTO `supporter_table` (`ID`, `member_id`, `support_id`, `belongs_id`, `created_at`, `update_at`) VALUES
-(1, 22, 3, 1, '2022-01-21 00:02:06', '2022-01-21 00:02:06'),
 (3, 24, 3, 3, '2022-01-21 00:59:47', '2022-01-21 00:59:47'),
-(4, 27, 4, 1, '2022-01-21 01:10:44', '2022-01-21 01:10:44');
+(4, 27, 4, 1, '2022-01-21 01:10:44', '2022-01-21 01:10:44'),
+(5, 22, 3, 1, '2022-01-21 12:44:26', '2022-01-21 12:44:26');
 
 -- --------------------------------------------------------
 
@@ -290,6 +334,18 @@ ALTER TABLE `belongs_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- テーブルのインデックス `communicate_table`
+--
+ALTER TABLE `communicate_table`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- テーブルのインデックス `friend_table`
+--
+ALTER TABLE `friend_table`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- テーブルのインデックス `kaigonintei_table`
 --
 ALTER TABLE `kaigonintei_table`
@@ -354,6 +410,18 @@ ALTER TABLE `belongs_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- テーブルの AUTO_INCREMENT `communicate_table`
+--
+ALTER TABLE `communicate_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- テーブルの AUTO_INCREMENT `friend_table`
+--
+ALTER TABLE `friend_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- テーブルの AUTO_INCREMENT `kaigonintei_table`
 --
 ALTER TABLE `kaigonintei_table`
@@ -363,7 +431,7 @@ ALTER TABLE `kaigonintei_table`
 -- テーブルの AUTO_INCREMENT `medical_table`
 --
 ALTER TABLE `medical_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- テーブルの AUTO_INCREMENT `member_table`
@@ -393,7 +461,7 @@ ALTER TABLE `sinzoku_table`
 -- テーブルの AUTO_INCREMENT `supporter_table`
 --
 ALTER TABLE `supporter_table`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- テーブルの AUTO_INCREMENT `support_table`

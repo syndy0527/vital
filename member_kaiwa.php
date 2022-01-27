@@ -10,7 +10,7 @@ check_session_id();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>こみくと（利用者ホーム）</title>
+    <title>Document</title>
 </head>
 
 <body>
@@ -19,20 +19,23 @@ check_session_id();
             <p>利用者:<?= $_SESSION['mbname'] ?></p>
         </div>
     </header>
+
     <div>
         <h1>こみくと</h1>
-        <p>ー 利用者ホーム ー</p>
+        <p>ー 友達と話す ー</p>
     </div>
     <div>
-        <a class="button" href="member_kaiwa.php">友達と話す</a>
+        <a class="button">顔を見て話す</a>
     </div>
     <div>
-        <a class="button" href="vital_check.php">健康チェック</a>
+        <a class="button" href="member_mail.php">メールする</a>
     </div>
     <div>
-        <a class="button" href="member_input.php">基本情報入力</a>
+        <a class="button">写真を送る</a>
     </div>
-    <p><a href="logout.php">ログアウト</a></p>
-</body>
+    <div>
+        <a class="button" href="member_friend_add.html">友達を追加する</a>
+    </div>
+    <p><a href=" member_home.php">ホーム画面へ</a></p>
 
 </html>

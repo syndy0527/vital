@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="member_friend_add.php" method="POSt">
+        <fieldset>
+            <legend>友達の追加</legend>
+            <a href="member_kaiwa.php">友達と話す画面</a>
+            <div>
+                友達検索：<input type="text" id="search">
+            </div>
+            <div>
+                <select name="id" id="table"></select>
+                <input type='checkbox' name='friend' value='1'> <label for="">追加</label>
+            </div>
+            <!-- <table>
+                <thead>
+                    <tr>
+                        <th>名前</th>
+                        <th>追加</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    <!-- ここに<tr><td>deadline</td><td>todo</td><tr>の形でデータが入る -->
+            <!-- </tbody>
+            </table> -->
+            <div>
+                <button>友達を追加</button>
+            </div>
+            <a href="member_friend_list.php">友達一覧へ</a>
+        </fieldset>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+
+            $('#search').on('keyup', function (e) {
+                console.log(e.target.value);
+                const searchWord = e.target.value;
+                const requestUrl = "member_friend_get.php";
+
+                // ajax_search.html
+
+                axios
+                    .get(`${requestUrl}?searchword=${searchWord}`)
+                    .then(function (response) {
+                        console.log(response.data);
+                        const array = [];
+                        response.data.forEach(element => {
+                            // array.push(`<tr><td>'${element.mbname}'</td><td><input type='hidden' name='friend[]' value='0' ></td><td><input type='checkbox' name='friend[]' value='1'></td><td><input type='hidden' name='id[]' value='${element.member_id}'></td><tr>`)
+                            array.push(`<option value='${element.member_id}'>'${element.mbname}'</option>`)
+                        });
+                        $("#table").html(array);
+                    })
+                    .catch(function (error) {
+                        // 省略
+                    })
+            });
+
+        </script>
+    </form>
+</body>
+
+</html>
