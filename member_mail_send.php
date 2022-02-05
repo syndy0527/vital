@@ -1,5 +1,5 @@
 <?php
-// var_dump($_FILES);
+// var_dump($_POST);
 // exit();
 session_start();
 include("functions.php");
@@ -17,6 +17,9 @@ if (
 $recieve_id = $_POST['recieve_id'];
 $text = $_POST['text'];
 $id = $_POST['id'];
+
+// var_dump($recieve_id);
+// exit();
 
 if (isset($_FILES['upfile']) && $_FILES['upfile']['error'] == 0) {
     // 送信が正常に行われたときの処理
@@ -48,7 +51,7 @@ if (isset($_FILES['upfile']) && $_FILES['upfile']['error'] == 0) {
         exit('Error:画像がありません');
     }
 } else {
-    exit('Error:画像が送信されていません');
+    $img = NULL;
 }
 
 $pdo = connect_to_db();
@@ -68,5 +71,5 @@ try {
     exit();
 }
 
-header("Location:member_mail.php");
+header("Location:member_mail.php?id={$recieve_id}");
 exit();

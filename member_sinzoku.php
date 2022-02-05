@@ -35,9 +35,15 @@ foreach ($val as $record) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+    </header>
     <form action="member_sinzoku_update.php" method="POST">
         <fieldset>
             <legend>親族登録</legend>
@@ -80,6 +86,9 @@ foreach ($val as $record) {
 
         </fieldset>
     </form>
+    <div class="top">
+        <a class="gohome" href=" member_input.php"><span>基本情報入力へ</span></a>
+    </div>
 </body>
 
 </html>

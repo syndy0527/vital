@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.3.js"></script>
+    <title>skyway</title>
+    <link rel="stylesheet" href="css/style_skyway.css">
+</head>
+
+<body>
+    <!-- <header class="header">
+        <div class="home_head">
+            <p>利用者:
+                <?= $_SESSION['mbname'] ?>
+            </p>
+        </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
+        </div>
+    </header> -->
+    <div>
+        <div class="contena">
+            <video id="their-video" width="600px" autoplay muted playsinline></video>
+        </div>
+        <div class="contena">
+            <video id="my-video" width="400px" autoplay muted playsinline></video>
+        </div>
+        <div class="contena">
+            <p id="my-id"></p>
+        </div>
+        <div class="contena">
+            <input id="their-id"></input>
+            <button id="make-call">発信</button>
+        </div>
+    </div>
+    <div class="top">
+        <a class="gohome" href="member_kaiwa.php">友達と話すへ</a>
+    </div>
+
+
+
+    <script>
+        let localStream;
+
+        // カメラ映像取得
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                // 成功時にvideo要素にカメラ映像をセットし、再生
+                const videoElm = document.getElementById('my-video');
+                videoElm.srcObject = stream;
+                videoElm.play();
+                // 着信時に相手にカメラ映像を返せるように、グローバル変数に保存しておく
+                localStream = stream;
+            }).catch(error => {
+                // 失敗時にはエラーログを出力
+                console.error('mediaDevice.getUserMedia() error:', error);
+                return;
+            });
+
+        //Peer作成
+        const peer = new Peer({
+            key: '180d2ca9-5d20-48b0-93bf-26b49f4fd8ba',
+            debug: 3
+        });
+
+        //PeerID取得
+        peer.on('open', () => {
+            document.getElementById('my-id').textContent = peer.id;
+        });
+
+        // 発信処理
+        document.getElementById('make-call').onclick = () => {
+            const theirID = document.getElementById('their-id').value;
+            const mediaConnection = peer.call(theirID, localStream);
+            setEventListener(mediaConnection);
+        };
+
+        // イベントリスナを設置する関数
+        const setEventListener = mediaConnection => {
+            mediaConnection.on('stream', stream => {
+                // video要素にカメラ映像をセットして再生
+                const videoElm = document.getElementById('their-video')
+                videoElm.srcObject = stream;
+                videoElm.play();
+            });
+        }
+
+        //着信処理
+        peer.on('call', mediaConnection => {
+            mediaConnection.answer(localStream);
+            setEventListener(mediaConnection);
+        });
+    </script>
+</body>
+
+</html>

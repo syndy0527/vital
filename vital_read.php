@@ -43,12 +43,17 @@ foreach ($val as $record) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+    </header>
     <fieldset>
         <legend>健康情報</legend>
-        <a href="vital_check.php">健康チェックへ</a>
         <div>
             利用者：<?= $_SESSION['mbname'] ?>
         </div>
@@ -69,7 +74,9 @@ foreach ($val as $record) {
             </tbody>
         </table>
     </fieldset>
-
+    <div class="top">
+        <a class="gohome" href=" vital_check.php"><span>健康チェックへ</span></a>
+    </div>
 </body>
 
 </html>

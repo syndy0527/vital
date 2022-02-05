@@ -47,9 +47,15 @@ foreach ($result as $record) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style_home_admin.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>管理者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+    </header>
     <fieldset>
         <legend>会員一覧</legend>
         <a href="admin_home.php">管理者ホームへ</a>
@@ -72,7 +78,9 @@ foreach ($result as $record) {
             </tbody>
         </table>
     </fieldset>
-
+    <div class="top">
+        <a class="gohome" href=" admin_home.php"><span>ホーム画面へ</span></a>
+    </div>
 </body>
 
 </html>

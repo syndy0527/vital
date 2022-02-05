@@ -48,9 +48,15 @@ check_session_id();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>バイタルデータ入力</title>
+    <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+    </header>
     <form action="vital_create.php" method="POST">
         <fieldset>
             <legend>バイタルデータ入力</legend>
@@ -83,10 +89,11 @@ check_session_id();
             <div>
                 <button>submit</button>
             </div>
-            <a href="vital_check.php"> 健康チェックへ</a>
         </fieldset>
     </form>
-
+    <div class="top">
+        <a class="gohome" href=" vital_check.php"><span>健康チェックへ</span></a>
+    </div>
 </body>
 
 </html>

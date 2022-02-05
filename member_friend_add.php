@@ -12,7 +12,7 @@ if (
 
 $friend = $_POST["friend"];
 $friend_id = $_POST["id"];
-// var_dump($friend_id)
+// var_dump($friend_id);
 // exit();
 
 include('functions.php');
@@ -35,24 +35,38 @@ try {
 $val = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($val);
 // exit();
-foreach ($val as $record) {
-    // var_dump($record);
-    // exit();
-    if ($record["friend_id"] != $friend_id || $record["friend_id"] == NULL) {
-        $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
-        $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
-        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
-    } else {
-        exit('すでに友達になっています。');
+if ($val != NULL) {
+    foreach ($val as $record) {
+        // var_dump($friend_id);
+        // exit();
+        if ($record["friend_id"] != $friend_id || $record["friend_id"] == NULL) {
+            $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
+            $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
+            try {
+                $status = $stmt->execute();
+            } catch (PDOException $e) {
+                echo json_encode(["sql error" => "{$e->getMessage()}"]);
+                exit();
+            }
+        } else {
+            exit('すでに友達になっています。');
+        }
     }
-}
-try {
-    $status = $stmt->execute();
-} catch (PDOException $e) {
-    echo json_encode(["sql error" => "{$e->getMessage()}"]);
-    exit();
+} else {
+    $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+    $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
+    $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
+    try {
+        $status = $stmt->execute();
+    } catch (PDOException $e) {
+        echo json_encode(["sql error" => "{$e->getMessage()}"]);
+        exit();
+    }
 }
 header("Location:member_friend_add.html");
 exit();

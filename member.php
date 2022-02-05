@@ -28,9 +28,15 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+    </header>
     <form action="member_create.php" method="POST">
         <fieldset>
             <legend>基本情報登録・変更</legend>
@@ -58,12 +64,13 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
             <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
             <div>
-                <a href="member_home.php"> ホーム画面へ</a>
         </fieldset>
 
 
     </form>
-
+    <div class="top">
+        <a class="gohome" href=" member_input.php"><span>基本情報入力へ</span></a>
+    </div>
 </body>
 
 </html>

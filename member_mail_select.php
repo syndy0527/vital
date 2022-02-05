@@ -1,13 +1,11 @@
 <?php
-include('functions.php');
 session_start();
+include("functions.php");
 check_session_id();
 $id = $_SESSION['member_id'];
-// DB接続
 $pdo = connect_to_db();
 
-
-$sql = "SELECT friend_table.member_id,mbname FROM `friend_table` LEFT OUTER JOIN member_table ON friend_table.friend_id=member_table.member_id WHERE friend_table.member_id=$id;";
+$sql = "SELECT friend_table.member_id,friend_table.friend_id,mbname FROM `friend_table` LEFT OUTER JOIN member_table ON friend_table.friend_id=member_table.member_id WHERE friend_table.member_id=$id;";
 
 $stmt = $pdo->prepare($sql);
 
@@ -21,14 +19,14 @@ try {
 }
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// echo '<pre>';
-// var_dump($result);
-// echo '<pre>';
-// exit();
+
 $output = "";
 foreach ($result as $record) {
-    $output .= "<tr><td>{$record['mbname']}</td><tr>";
+    // var_dump($record);
+    // exit();
+    $output .= "<p><a href='member_mail.php?id={$record['friend_id']}'>{$record['mbname']}</a> </p>";
 };
+
 ?>
 
 <!DOCTYPE html>
@@ -39,23 +37,29 @@ foreach ($result as $record) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="home_head">
+            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
+        </div>
+    </header>
     <fieldset>
         <legend>友達一覧</legend>
-        <a href="member_kaiwa.php">友達と話すへ</a>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>友達</th>
-                </tr>
-            </thead>
+        <table>
             <tbody>
                 <?= $output ?>
             </tbody>
         </table>
     </fieldset>
+    <div class="top">
+        <a class="gohome" href=" member_kaiwa.php"><span>友達と話すへ</span></a>
+    </div>
 </body>
 
 </html>
