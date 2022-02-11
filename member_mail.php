@@ -121,7 +121,7 @@ function convert_to_fuzzy_time($time_db)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>コミュニケーションボード</title>
     <link rel="stylesheet" href="css/style_mail.css">
 </head>
 
@@ -159,33 +159,24 @@ function convert_to_fuzzy_time($time_db)
         <div>
             <h3>メッセージ送信</h3>
         </div>
-        <form action="member_mail_send.php" method="POST" enctype="multipart/form-data">
-            <!-- <fieldset>
-                    <legend>メール送信</legend>
-                   
-                    <div>
-                        利用者：<?= $_SESSION['mbname'] ?>
-                    </div>
-                    <div>
-                        相手先：<?= $destination_user["mbname"] ?>
-                    </div> -->
-            <div>
-                コメント：<textarea name="text" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div>
-                <input type="file" name="upfile" accept="image/*" capture="camera" />
-            </div>
-            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
-            <input type="hidden" name="recieve_id" value="<?= $recieve_id  ?>">
-            <div>
-                <button>submit</button>
-            </div>
-
-            <!-- </fieldset> -->
-        </form>
+        <div>
+            <form action="member_mail_send.php" method="POST" enctype="multipart/form-data">
+                <div>
+                    コメント：<textarea name="text" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div>
+                    <input type="file" name="upfile" accept="image/*" capture="camera" />
+                </div>
+                <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
+                <input type="hidden" name="recieve_id" value="<?= $recieve_id  ?>">
+                <div>
+                    <button>submit</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="top">
-        <a class="gohome" href="member_kaiwa.php">友達と話すへ</a>
+        <a class="gohome" href="member_mail_select.php">友達一覧へ</a>
     </div>
 
 </body>

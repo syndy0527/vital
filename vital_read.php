@@ -42,8 +42,8 @@ foreach ($val as $record) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style_home.css">
+    <title>健康情報一覧</title>
+    <link rel="stylesheet" href="css/style_member_page.css">
 </head>
 
 <body>
@@ -51,29 +51,36 @@ foreach ($val as $record) {
         <div class="home_head">
             <p>利用者:<?= $_SESSION['mbname'] ?></p>
         </div>
-    </header>
-    <fieldset>
-        <legend>健康情報</legend>
-        <div>
-            利用者：<?= $_SESSION['mbname'] ?>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
         </div>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>登録日</th>
-                    <th>体温</th>
-                    <th>血圧</th>
-                    <th>脈拍</th>
-                    <th>体重</th>
-                    <th>水分量</th>
-                    <th>服薬状況</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?= $output ?>
-            </tbody>
-        </table>
-    </fieldset>
+    </header>
+    <div class="field_main">
+        <fieldset class="field_set">
+            <!-- <legend>健康情報</legend> -->
+            <div>
+                <P class="field_set_text">健康情報一覧</P>
+            </div>
+            <div class="field_set_table">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>登録日</th>
+                            <th>体温</th>
+                            <th>血圧</th>
+                            <th>脈拍</th>
+                            <th>体重</th>
+                            <th>水分量</th>
+                            <th>服薬状況</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?= $output ?>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
     <div class="top">
         <a class="gohome" href=" vital_check.php"><span>健康チェックへ</span></a>
     </div>

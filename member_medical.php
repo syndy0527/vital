@@ -183,7 +183,7 @@ $output5 = "<p> 登録状況：{$result3['belongs']} / {$result3['mbname']}</p>"
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>医療情報登録</title>
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
@@ -191,6 +191,9 @@ $output5 = "<p> 登録状況：{$result3['belongs']} / {$result3['mbname']}</p>"
     <header class="header">
         <div class="home_head">
             <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
         </div>
     </header>
     <form action="member_medical_update.php" method="POST">

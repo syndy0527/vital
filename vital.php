@@ -56,6 +56,9 @@ check_session_id();
         <div class="home_head">
             <p>利用者:<?= $_SESSION['mbname'] ?></p>
         </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
+        </div>
     </header>
     <form action="vital_create.php" method="POST">
         <fieldset>

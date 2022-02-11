@@ -10,7 +10,7 @@ check_session_id();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>健康チェック画面</title>
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
@@ -18,6 +18,9 @@ check_session_id();
     <header class="header">
         <div class="home_head">
             <p>利用者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
         </div>
     </header>
     <div class="home_top">

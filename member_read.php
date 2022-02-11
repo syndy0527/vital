@@ -46,7 +46,7 @@ foreach ($result as $record) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>利用者一覧（管理者用）</title>
     <link rel="stylesheet" href="css/style_home_admin.css">
 </head>
 
@@ -54,6 +54,9 @@ foreach ($result as $record) {
     <header class="header">
         <div class="home_head">
             <p>管理者:<?= $_SESSION['mbname'] ?></p>
+        </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
         </div>
     </header>
     <fieldset>
