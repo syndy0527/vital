@@ -9,7 +9,7 @@ session_start();
 check_session_id();
 $id = $_SESSION['member_id'];
 
-
+//送信ユーザー情報の抽出
 $pdo = connect_to_db();
 $sql = 'SELECT member_id,mbname FROM member_table WHERE member_id=:id AND	is_dalete=0';
 $stmt = $pdo->prepare($sql);
@@ -23,6 +23,7 @@ try {
 }
 $current_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+//受信ユーザー情報の抽出
 $pdo = connect_to_db();
 $sql = 'SELECT member_id,mbname FROM member_table WHERE member_id=:id AND	is_dalete=0';
 $stmt = $pdo->prepare($sql);
@@ -40,6 +41,7 @@ $destination_user = $stmt->fetch(PDO::FETCH_ASSOC);
 // echo '<pre>';
 // exit();
 
+//メッセージの抽出
 $pdo = connect_to_db();
 $sql = 'SELECT * FROM communicate_table WHERE (send_member_id=:id and recieve_member_id=:recieve_id) or (send_member_id=:recieve_id and recieve_member_id=:id) ORDER BY created_at ASC';
 $stmt = $pdo->prepare($sql);
@@ -144,37 +146,39 @@ function convert_to_fuzzy_time($time_db)
                     <div class="mycomment_right">
                         <p><?= $message['text'] ?></p>
                     </div>
+                <?php else : ?>
+                    <div class="left">
+                        <div class="chatting">
+                            <div class="says"><?= $message['text'] ?></div><span class="message_created_at"><?= convert_to_fuzzy_time($message['created_at']) ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
-        <?php else : ?>
-            <div class="left">
-                <div class="chatting">
-                    <div class="says"><?= $message['text'] ?></div><span class="message_created_at"><?= convert_to_fuzzy_time($message['created_at']) ?></span>
-                </div>
+        <?php endforeach ?>
+
+        <div class="message_send">
+            <div>
+                <h3>メッセージ送信</h3>
             </div>
-        <?php endif; ?>
-    <?php endforeach ?>
+            <div>
+                <form action="member_mail_send.php" method="POST" enctype="multipart/form-data">
+                    <div>
+                        コメント：<textarea name="text" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div>
+                        <input type="file" name="upfile" accept="image/*" capture="camera" />
+                    </div>
+                    <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
+                    <input type="hidden" name="recieve_id" value="<?= $recieve_id  ?>">
+                    <div>
+                        <button>submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div class="message_send">
-        <div>
-            <h3>メッセージ送信</h3>
-        </div>
-        <div>
-            <form action="member_mail_send.php" method="POST" enctype="multipart/form-data">
-                <div>
-                    コメント：<textarea name="text" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div>
-                    <input type="file" name="upfile" accept="image/*" capture="camera" />
-                </div>
-                <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
-                <input type="hidden" name="recieve_id" value="<?= $recieve_id  ?>">
-                <div>
-                    <button>submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
     <div class="top">
         <a class="gohome" href="member_mail_select.php">友達一覧へ</a>
     </div>

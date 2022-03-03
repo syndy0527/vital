@@ -14,6 +14,7 @@ if (
     echo json_encode(["error_msg" => "no input"]);
     exit();
 }
+
 $recieve_id = $_POST['recieve_id'];
 $text = $_POST['text'];
 $id = $_POST['id'];
@@ -71,5 +72,34 @@ try {
     exit();
 }
 
-header("Location:member_mail.php?id={$recieve_id}");
-exit();
+// //メッセージリレーション
+// $pdo = connect_to_db();
+// $sql = 'SELECT send_member_id,recieve_member_id FROM message_relation_table WHERE (send_member_id=:id and recieve_member_id=:recieve_id) or (send_member_id=:recieve_id and recieve_member_id=:id) ORDER BY created_at ASC';
+// $stmt = $pdo->prepare($sql);
+// $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+// $stmt->bindValue(':recieve_id', $recieve_id, PDO::PARAM_INT);
+// // SQL実行（実行に失敗すると `sql error ...` が出力される）
+// try {
+//     $status = $stmt->execute();
+// } catch (PDOException $e) {
+//     echo json_encode(["sql error" => "{$e->getMessage()}"]);
+//     exit();
+// }
+// $m_relation = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// //メッセージリレーションテーブル登録
+// if (!isset($m_relation)) {
+//     $sql = 'INSERT INTO message_relation_table(id,send_member_id,recieve_member_id)VALUES(NULL,:id,:recieve_id)';
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+//     $stmt->bindValue(':recieve_id', $recieve_id, PDO::PARAM_STR);
+//     try {
+//         $status = $stmt->execute();
+//     } catch (PDOException $e) {
+//         echo json_encode(["sql error" => "{$e->getMessage()}"]);
+//         exit();
+//     }
+// }
+
+// header("Location:member_mail.php?id={$recieve_id}");
+// exit();

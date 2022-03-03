@@ -36,7 +36,7 @@
             </div>
         </fieldset>
         <div class="top">
-            <a class="gohome" href=" login.php"><span>ログイン画面へ</span></a>
+            <a class="gohome" href=" index.php"><span>ログイン画面へ</span></a>
         </div>
     </form>
 </body>

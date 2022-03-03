@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2022-01-27 14:28:41
+-- 生成日時: 2022-03-03 00:10:56
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -52,8 +52,8 @@ INSERT INTO `belongs_table` (`id`, `belongs_id`, `belongs`) VALUES
 CREATE TABLE `communicate_table` (
   `id` int(11) NOT NULL,
   `send_member_id` int(11) NOT NULL,
-  `text` varchar(128) COLLATE utf8_bin NOT NULL,
-  `image` varchar(128) COLLATE utf8_bin NOT NULL,
+  `text` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(128) COLLATE utf8_bin DEFAULT NULL,
   `recieve_member_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -64,7 +64,39 @@ CREATE TABLE `communicate_table` (
 
 INSERT INTO `communicate_table` (`id`, `send_member_id`, `text`, `image`, `recieve_member_id`, `created_at`) VALUES
 (5, 21, '元気ですかー', 'upload/20220127134021501533dd3603b413001140dfc609f6ee.jpg', 16, '2022-01-27 21:40:21'),
-(6, 21, '元気ですよー', 'upload/20220127134055050199afb758b42bb1ab75a1ec43e061.jpg', 26, '2022-01-27 21:40:55');
+(6, 21, '元気ですよー', 'upload/20220127134055050199afb758b42bb1ab75a1ec43e061.jpg', 26, '2022-01-27 21:40:55'),
+(13, 16, '元気ですよ！', NULL, 21, '2022-02-02 06:01:03'),
+(14, 26, '元気かい', NULL, 21, '2022-02-02 06:02:05'),
+(15, 26, '服貸して', NULL, 16, '2022-02-02 06:03:20'),
+(16, 26, '１１１\r\n', NULL, 16, '2022-02-02 12:26:50'),
+(18, 21, '跳ぶぞー', 'upload/202202041857072a9936101c6c7732fb79a59f5d99f2a6.png', 16, '2022-02-05 02:57:07'),
+(19, 16, '遊ぼう！', NULL, 21, '2022-02-05 04:23:27'),
+(20, 16, '遊ぼう', NULL, 26, '2022-02-05 04:25:51'),
+(21, 21, '遊ぶぞ！', NULL, 16, '2022-02-05 08:23:24'),
+(22, 21, '１０時に集合！\r\n', NULL, 16, '2022-02-05 09:53:03'),
+(23, 16, 'いまから出ます。', NULL, 21, '2022-02-05 09:57:20'),
+(24, 16, 'わかりました。', NULL, 16, '2022-02-05 09:58:20'),
+(25, 16, 'いつもの場所で', NULL, 21, '2022-02-05 09:59:45'),
+(26, 21, '了解', NULL, 16, '2022-02-05 10:01:35'),
+(27, 28, '元気ですか', NULL, 16, '2022-02-05 11:37:42'),
+(28, 28, '遊ぼう！', NULL, 21, '2022-02-05 11:38:07'),
+(29, 21, 'よう！\r\n', NULL, 16, '2022-02-12 10:47:04'),
+(30, 21, 'あのさ', NULL, 16, '2022-02-12 10:47:13'),
+(31, 21, '遊ぼう', NULL, 16, '2022-02-12 10:47:24'),
+(32, 16, 'いいね！\r\n', NULL, 21, '2022-02-12 10:48:44'),
+(33, 21, '遊ぼう', NULL, 16, '2022-02-13 10:47:07'),
+(34, 21, 'あああ', NULL, 16, '2022-02-13 10:50:59'),
+(35, 21, 'あああ', NULL, 16, '2022-02-13 10:52:21'),
+(36, 21, 'あああ', NULL, 16, '2022-02-13 11:10:02'),
+(37, 21, 'あああ', NULL, 16, '2022-02-13 11:11:37'),
+(38, 21, 'あああ', NULL, 16, '2022-02-13 11:27:20'),
+(39, 21, 'あああ', NULL, 16, '2022-02-13 11:27:34'),
+(40, 21, 'あああ', '', 16, '2022-02-13 11:28:02'),
+(41, 21, 'あああ', '', 16, '2022-02-13 11:28:12'),
+(42, 21, 'あああ', '', 16, '2022-02-13 11:29:24'),
+(43, 21, 'あああ', NULL, 16, '2022-02-13 11:31:35'),
+(44, 21, 'あああ', '2022021303415118f20393631a1f3cb57b918c142ba179.', 16, '2022-02-13 11:41:51'),
+(45, 21, 'あああ', NULL, 16, '2022-02-13 11:43:16');
 
 -- --------------------------------------------------------
 
@@ -85,7 +117,19 @@ CREATE TABLE `friend_table` (
 
 INSERT INTO `friend_table` (`id`, `member_id`, `friend_id`, `friend_check`) VALUES
 (11, 21, 16, 1),
-(12, 21, 26, 1);
+(12, 21, 26, 1),
+(20, 16, 21, 1),
+(21, 16, 26, 1),
+(22, 26, 16, 1),
+(23, 26, 21, 1),
+(24, 28, 16, 1),
+(25, 28, 21, 1),
+(26, 28, 26, 1),
+(27, 28, 26, 1),
+(28, 21, 13, 1),
+(38, 16, 13, 1),
+(39, 30, 13, 1),
+(40, 30, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +179,8 @@ CREATE TABLE `medical_table` (
 --
 
 INSERT INTO `medical_table` (`id`, `member_id`, `kaigonintei_id`, `shougainintei_id`, `caremane`, `caredocter`, `created_at`, `update_at`) VALUES
-(1, 21, 2, 16, 24, 27, '2022-01-21 01:35:36', '2022-01-22 13:01:03');
+(1, 21, 2, 16, 24, 27, '2022-01-21 01:35:36', '2022-01-22 13:01:03'),
+(13, 28, 2, 1, 22, 27, '2022-02-05 11:35:55', '2022-02-05 11:35:55');
 
 -- --------------------------------------------------------
 
@@ -162,14 +207,30 @@ CREATE TABLE `member_table` (
 --
 
 INSERT INTO `member_table` (`member_id`, `mbname`, `login_id`, `password`, `is_admin`, `is_dalete`, `seibetu`, `barthday`, `mbaddress`, `created_at`, `update_at`) VALUES
-(13, '田中　新治', '0', '0', 2, 0, '男', '1975-05-27', '山口県防府市高井６６６', '2021-12-23 00:40:11', '2022-01-11 00:23:37'),
-(16, '田中　奏大', '0', '0', 0, 0, '男', '2006-01-11', '山口市秋穂二島', '2021-12-23 00:41:35', '2021-12-23 00:41:35'),
+(13, '田中　新治', '0', '0', 0, 0, '男', '1975-05-27', '東京都港区', '2021-12-23 00:40:11', '2022-02-05 11:40:07'),
+(16, '田中　奏大', 'kana', '111111', 0, 0, '男', '2006-01-11', '山口市秋穂二島', '2021-12-23 00:41:35', '2021-12-23 00:41:35'),
 (21, '田中　菜々子', 'nata', '777777', 0, 0, '女', '2022-05-19', '佐賀県佐賀市666', '2022-01-10 11:31:15', '2022-01-10 15:58:02'),
 (22, '幾田　りら', 'rira', '111111', 1, 0, '0', '0000-00-00', '東京都港区', '2022-01-10 14:10:05', '2022-01-16 14:54:40'),
 (23, '松木　玖生', 'matu', '101010', 2, 0, '0', '0000-00-00', '0', '2022-01-10 21:35:10', '2022-01-10 21:35:10'),
 (24, '浅川　結', 'tata', '222222', 1, 0, '女', '2022-01-05', '山口市秋穂', '2022-01-15 12:03:58', '2022-01-15 12:04:40'),
-(26, '田中　史奈', 'nana', '222222', 0, 0, '女', '2021-12-29', '山口県防府市高井', '2022-01-15 13:15:19', '2022-01-15 13:16:02'),
-(27, '武豊', 'take', '111111', 1, 0, '0', '0000-00-00', '0', '2022-01-16 14:56:00', '2022-01-16 14:56:00');
+(26, '田中　史奈', 'fumi', '222222', 0, 0, '女', '2021-12-29', '山口県防府市高井', '2022-01-15 13:15:19', '2022-01-15 13:16:02'),
+(27, '武豊', 'take', '111111', 1, 0, '0', '0000-00-00', '0', '2022-01-16 14:56:00', '2022-01-16 14:56:00'),
+(28, '松木　安太郎', 'yasu', '111111', 0, 0, '男', '1999-04-01', '東京都杉並区', '2022-02-05 11:34:18', '2022-02-05 11:35:01'),
+(29, '平野　歩夢', 'hira', '111111', 0, 0, '0', '0000-00-00', '0', '2022-02-11 09:40:35', '2022-02-11 09:40:35'),
+(30, '田中　順子', 'taju', '111111', 0, 0, '0', '0000-00-00', '0', '2022-02-13 08:16:22', '2022-02-13 08:16:22'),
+(31, '中江　有里', 'yuri', '111111', 0, 0, '0', '0000-00-00', '0', '2022-03-02 04:18:42', '2022-03-02 04:18:42');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `message_relation_table`
+--
+
+CREATE TABLE `message_relation_table` (
+  `id` int(11) NOT NULL,
+  `send_member_id` int(11) NOT NULL,
+  `recieve_member_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -242,7 +303,8 @@ CREATE TABLE `sinzoku_table` (
 --
 
 INSERT INTO `sinzoku_table` (`id`, `member_id`, `sinzokuname`, `sinzokuadd`, `sinzokugara`, `sinzokutel`, `created_at`, `update_at`) VALUES
-(1, 21, '田中新治', '防府市高井', '父', 833333333, '2022-01-17 00:59:16', '2022-01-17 00:59:16');
+(1, 21, '田中新治', '防府市高井', '父', 833333333, '2022-01-17 00:59:16', '2022-01-17 00:59:16'),
+(2, 28, '松木　梅子', '防府市高井', '母', 833333333, '2022-02-05 11:35:36', '2022-02-05 11:35:36');
 
 -- --------------------------------------------------------
 
@@ -266,7 +328,7 @@ CREATE TABLE `supporter_table` (
 INSERT INTO `supporter_table` (`ID`, `member_id`, `support_id`, `belongs_id`, `created_at`, `update_at`) VALUES
 (3, 24, 3, 3, '2022-01-21 00:59:47', '2022-01-21 00:59:47'),
 (4, 27, 4, 1, '2022-01-21 01:10:44', '2022-01-21 01:10:44'),
-(5, 22, 3, 1, '2022-01-21 12:44:26', '2022-01-21 12:44:26');
+(5, 22, 5, 2, '2022-01-21 12:44:26', '2022-02-05 11:39:22');
 
 -- --------------------------------------------------------
 
@@ -321,7 +383,8 @@ INSERT INTO `vital_table` (`id`, `member_id`, `record_date`, `taion`, `ketuatu_u
 (8, 24, '2022-01-15', 35, 77, 44, 79, 60, 1000, 1),
 (9, 25, '2022-01-15', 36, 70, 50, 50, 70, 1000, 1),
 (10, 21, '2022-01-16', 36, 98, 70, 65, 55, 1000, 1),
-(11, 21, '2022-01-17', 37, 99, 60, 55, 55, 1000, 2);
+(11, 21, '2022-01-17', 37, 99, 60, 55, 55, 1000, 2),
+(12, 28, '2022-02-05', 37, 99, 70, 80, 60, 1000, 1);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -362,6 +425,12 @@ ALTER TABLE `medical_table`
 --
 ALTER TABLE `member_table`
   ADD PRIMARY KEY (`member_id`);
+
+--
+-- テーブルのインデックス `message_relation_table`
+--
+ALTER TABLE `message_relation_table`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- テーブルのインデックス `setai_table`
@@ -413,13 +482,13 @@ ALTER TABLE `belongs_table`
 -- テーブルの AUTO_INCREMENT `communicate_table`
 --
 ALTER TABLE `communicate_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- テーブルの AUTO_INCREMENT `friend_table`
 --
 ALTER TABLE `friend_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- テーブルの AUTO_INCREMENT `kaigonintei_table`
@@ -431,13 +500,19 @@ ALTER TABLE `kaigonintei_table`
 -- テーブルの AUTO_INCREMENT `medical_table`
 --
 ALTER TABLE `medical_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- テーブルの AUTO_INCREMENT `member_table`
 --
 ALTER TABLE `member_table`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- テーブルの AUTO_INCREMENT `message_relation_table`
+--
+ALTER TABLE `message_relation_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- テーブルの AUTO_INCREMENT `setai_table`
@@ -455,7 +530,7 @@ ALTER TABLE `shougai_table`
 -- テーブルの AUTO_INCREMENT `sinzoku_table`
 --
 ALTER TABLE `sinzoku_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- テーブルの AUTO_INCREMENT `supporter_table`
@@ -473,7 +548,7 @@ ALTER TABLE `support_table`
 -- テーブルの AUTO_INCREMENT `vital_table`
 --
 ALTER TABLE `vital_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

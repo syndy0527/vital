@@ -57,8 +57,14 @@ foreach ($result as $record) {
             </tbody>
         </table>
     </fieldset>
-    <div class="top">
-        <a class="gohome" href=" member_kaiwa.php"><span>友達と話すへ</span></a>
+
+    <div class="top_content">
+        <div class="top">
+            <a class="gohome" href=" member_kaiwa.php"><span>友達と話すへ</span></a>
+        </div>
+        <div class="top">
+            <a class="gohome" href="member_mail_select.php"><span>友達一覧へ</span></a>
+        </div>
     </div>
 </body>
 

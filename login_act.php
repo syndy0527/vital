@@ -26,7 +26,6 @@ try {
 
 $val = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 if (!$val) {
     echo "<p>ログイン情報に誤りがあります</p>";
     echo "<a href=login.php>ログイン</a>";
@@ -37,6 +36,7 @@ if (!$val) {
     $_SESSION['is_admin'] = $val['is_admin'];
     $_SESSION['mbname'] = $val['mbname'];
     $_SESSION['member_id'] = $val['member_id'];
+    $_SESSION['login_id'] = $val['login_id'];
 
     if ($val['is_admin'] == 1) {
         header("Location:sien_home.php");

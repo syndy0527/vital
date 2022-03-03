@@ -35,25 +35,32 @@ try {
 $val = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($val);
 // exit();
-if ($val != NULL) {
+if (isset($val)) {
+    // echo '<pre>';
+    // var_dump($val);
+    // echo '<pre>';
+    // exit();
     foreach ($val as $record) {
-        // var_dump($friend_id);
+        // var_dump($record);
         // exit();
-        if ($record["friend_id"] != $friend_id || $record["friend_id"] == NULL) {
-            $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':id', $id, PDO::PARAM_STR);
-            $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
-            $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
-            try {
-                $status = $stmt->execute();
-            } catch (PDOException $e) {
-                echo json_encode(["sql error" => "{$e->getMessage()}"]);
-                exit();
-            }
-        } else {
+        if ($record["friend_id"] == $friend_id) {
             exit('すでに友達になっています。');
+            // var_dump($record["friend_id"]);
+            // exit();
+
+
         }
+    }
+    $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+    $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
+    $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
+    try {
+        $status = $stmt->execute();
+    } catch (PDOException $e) {
+        echo json_encode(["sql error" => "{$e->getMessage()}"]);
+        exit();
     }
 } else {
     $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';

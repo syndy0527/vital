@@ -31,7 +31,7 @@ check_session_id();
         <p class="home_top_text">ー 友達と話す ー</p>
     </div>
     <div class="home_button">
-        <a class="button" href="skyway.html">顔を見て話す</a>
+        <a class="button" href="skyway_main.php">顔を見て話す</a>
     </div>
     <div class="home_button">
         <a class="button" href="member_mail_select.php">メールする</a>

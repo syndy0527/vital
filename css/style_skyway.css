@@ -25,6 +25,14 @@ body{
 #their-video{
    background-color: black;
 }
+
+.callfriend{
+   display: flex;
+   justify-content: center;
+   margin: auto;
+   padding-top: 5px;
+}
+
 .contena{
    display: flex;
    justify-content: center;

@@ -78,7 +78,14 @@ h1{
 .top{
     display: flex;
     justify-content: center;
+    margin: 0px 20px; 
 }
+
+.top_content{
+    display: flex;
+    justify-content: center;    
+}
+
 
 .gohome{
       /*線の基点とするためrelativeを指定*/
@@ -121,4 +128,5 @@ h1{
 .gohome:hover::after {
   height:100%;
 }
+
 

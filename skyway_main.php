@@ -1,3 +1,37 @@
+<?php
+include('functions.php');
+session_start();
+check_session_id();
+$id = $_SESSION['member_id'];
+$mbname = $_SESSION['mbname'];
+$login_id = $_SESSION['login_id'];
+$login_id_json = json_encode($login_id);
+
+$pdo = connect_to_db();
+$sql = "SELECT friend_table.member_id,mbname,login_id FROM `friend_table` LEFT OUTER JOIN member_table ON friend_table.friend_id=member_table.member_id WHERE friend_table.member_id=$id;";
+$stmt = $pdo->prepare($sql);
+// SQL実行（実行に失敗すると `sql error ...` が出力される）
+try {
+    $status = $stmt->execute();
+} catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+}
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// echo '<pre>';
+// var_dump($result);
+// echo '<pre>';
+// exit();
+$output = [];
+foreach ($result as $record) {
+    array_push($output, "{$record["login_id"]}");
+};
+// var_dump($output);
+// exit;
+$friend = json_encode($output);
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -14,12 +48,12 @@
 <body>
     <header class="header">
         <div class="home_head">
-            <!-- <p>利用者:
+            <p>利用者:
                 <?= $_SESSION['mbname'] ?>
-            </p> -->
+            </p>
         </div>
         <div class="home_head_text">
-            <!-- <p><a href="logout.php">ログアウト</a></p> -->
+            <p><a href="logout.php">ログアウト</a></p>
         </div>
     </header>
     <div>
@@ -29,25 +63,30 @@
         <div class="contena">
             <video id="my-video" width="400px" autoplay muted playsinline></video>
         </div>
+        <div class="callfriend">
+            <p>現在テレビ電話ができる友達</p>
+            <ul id="calling">
+            </ul>
+        </div>
         <div class="contena">
             <p id="my-id"></p>
         </div>
         <div class="contena">
-            <input id="their-id"></input>
+            <select id="their-id"></select>
             <button id="make-call">発信</button>
         </div>
     </div>
     <div class="top">
         <a class="gohome" href="member_kaiwa.php">友達と話すへ</a>
     </div>
-
-
-
     <script>
         let localStream;
 
         // カメラ映像取得
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            })
             .then(stream => {
                 // 成功時にvideo要素にカメラ映像をセットし、再生
                 const videoElm = document.getElementById('my-video');
@@ -62,20 +101,45 @@
             });
 
         //Peer作成
-        const peer = new Peer({
+        const id = JSON.parse('<?php echo $login_id_json; ?>');
+        // console.log(id);
+        const peer = new Peer([id], {
             key: '180d2ca9-5d20-48b0-93bf-26b49f4fd8ba',
             debug: 3
         });
 
+
+
         //PeerID取得
         peer.on('open', () => {
             document.getElementById('my-id').textContent = peer.id;
+            peer.listAllPeers((peers) => {
+                const peerslist = peers;
+                const peersme = [id];
+                const friend = JSON.parse('<?php echo $friend; ?>');
+                const peerslists = peerslist.filter(item =>
+                    peersme.indexOf(item) == -1
+                );
+                const friendmatchs = friend.concat(peerslists)
+                const friendmatch = friendmatchs.filter(function(x, i, self) {
+                    return self.indexOf(x) === i && i !== self.lastIndexOf(x);
+                });
+                console.log(friendmatch);
+                for (i = 0; i < friendmatch.length; i++) {
+                    let li = document.createElement('li');
+                    li.textContent = friendmatch[i];
+                    document.getElementById('calling').appendChild(li);
+                }
+                for (i = 0; i < friendmatch.length; i++) {
+                    let option = document.createElement('option');
+                    option.textContent = friendmatch[i];
+                    document.getElementById('their-id').appendChild(option);
+                }
+            });
         });
 
-        // //PeerIDlist
-        // peer.listAllPeers((peers) => {
-        //     console.log(peers);
-        // });
+
+
         // 発信処理
         document.getElementById('make-call').onclick = () => {
             const theirID = document.getElementById('their-id').value;
@@ -98,6 +162,8 @@
             mediaConnection.answer(localStream);
             setEventListener(mediaConnection);
         });
+
+        //PeerIDlist
     </script>
 </body>
 
