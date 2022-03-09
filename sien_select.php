@@ -1,3 +1,11 @@
+<?php
+include('functions.php');
+session_start();
+check_session_id();
+$id = $_SESSION['member_id'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -5,31 +13,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>友達追加</title>
-    <link rel="stylesheet" href="css/style_member_page.css">
+    <title>支援追加</title>
+    <link rel="stylesheet" href="css/style_sien_page.css">
 </head>
 
 <body>
     <header class="header">
         <div class="home_head">
-            <p>利用者:
-                <!-- <?= $_SESSION['mbname'] ?> -->
+            <p>支援者:
+                <?= $_SESSION['mbname'] ?>
             </p>
-            <div class="home_head_text">
-                <p><a href="logout.php">ログアウト</a></p>
-            </div>
         </div>
+        <div class="home_head_text">
+            <p><a href="logout.php">ログアウト</a></p>
+        </div>
+
     </header>
     <div class="field_main">
-        <form action="member_friend_add.php" method="POSt">
+        <form action="sien_add.php" method="POST">
             <fieldset class="field_set">
-                <legend>友達の追加</legend>
+                <legend>支援対象者の追加</legend>
                 <div>
-                    友達検索：<input type="text" id="search">
+                    支援対象者検索：<input type="text" id="search">
                 </div>
                 <div>
                     <select name="id" id="table"></select>
-                    <input type='checkbox' name='friend' value='1'> <label for="">追加</label>
+                    <input type='checkbox' name='sien' value='1'> <label for="">追加</label>
                 </div>
                 <!-- <table>
                 <thead>
@@ -45,33 +54,29 @@
                 <!-- </tbody>
             </table> -->
                 <div>
-                    <button>友達を追加</button>
+                    <button>支援対象者を追加</button>
                 </div>
-                <a href="member_friend_list.php">友達一覧へ</a>
+                <a href="sien_list.php">支援対象者一覧へ</a>
             </fieldset>
     </div>
     <div class="top_content">
         <div class="top">
-            <a class="gohome" href=" member_kaiwa.php"><span>友達と話すへ</span></a>
-        </div>
-        <div class="top">
-            <a class="gohome" href="member_mail_select.php"><span>友達一覧へ</span></a>
+            <a class="gohome" href=" sien_home.php"><span>支援者ホームへ</span></a>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-
-        $('#search').on('keyup', function (e) {
+        $('#search').on('keyup', function(e) {
             console.log(e.target.value);
             const searchWord = e.target.value;
-            const requestUrl = "member_friend_get.php";
+            const requestUrl = "sien_get.php";
 
             // ajax_search.html
 
             axios
                 .get(`${requestUrl}?searchword=${searchWord}`)
-                .then(function (response) {
+                .then(function(response) {
                     console.log(response.data);
                     const array = [];
                     response.data.forEach(element => {
@@ -80,7 +85,7 @@
                     });
                     $("#table").html(array);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     // 省略
                 })
         });

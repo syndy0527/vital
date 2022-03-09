@@ -11,36 +11,60 @@ check_session_id();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>友達と話す</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="home_head">
-            <p>利用者:<?= $_SESSION['mbname'] ?></p>
-        </div>
-        <div class="home_head_text">
-            <p><a href="logout.php">ログアウト</a></p>
-        </div>
-    </header>
+    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
 
-    <div class="home_top">
-        <h1>コミクト</h1>
+                <form class="d-flex fs-4">
+                    <span class="navbar-text h5 ">
+                        利用者:<?= $_SESSION['mbname'] ?>
+                    </span>
+                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                </form>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row justify-content-center ">
+            <div class="col text-center my-5">
+                <p class="h2">ー テレビ電話 ー</p>
+            </div>
+        </div>
     </div>
-    <div class="home_top">
-        <p class="home_top_text">ー 友達と話す ー</p>
+    <div class="container-fluid">
+        <div class="row justify-content-center  ">
+            <div class="col text-center my-5">
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="skyway_main.php" role="button">友達と話す</a>
+            </div>
+        </div>
     </div>
-    <div class="home_button">
-        <a class="button" href="skyway_main.php">顔を見て話す</a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="skyway_main_sien.php" role="button">支援者と話す</a>
+            </div>
+        </div>
     </div>
-    <div class="home_button">
-        <a class="button" href="member_mail_select.php">メールする</a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="member_friend_select.php" role="button">友達を追加する</a>
+            </div>
+        </div>
     </div>
-    <div class="home_button">
-        <a class="button" href="member_friend_add.html">友達を追加する</a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="member_home.php" role="button">ホーム画面へ</a>
+            </div>
+        </div>
     </div>
-    <div class="top">
-        <a class="gohome" href=" member_home.php"><span>ホーム画面へ</span></a>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 
 </html>

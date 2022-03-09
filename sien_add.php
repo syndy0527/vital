@@ -4,14 +4,14 @@
 // echo '<pre>';
 // exit();
 if (
-    !isset($_POST['friend']) || $_POST['friend'] == '' ||
+    !isset($_POST['sien']) || $_POST['sien'] == '' ||
     !isset($_POST['id']) || $_POST['id'] == ''
 ) {
     exit('追加する人を選んでください');
 }
 
-$friend = $_POST["friend"];
-$friend_id = $_POST["id"];
+$sien = $_POST["sien"];
+$sien_id = $_POST["id"];
 // var_dump($friend_id);
 // exit();
 
@@ -23,7 +23,7 @@ $id = $_SESSION['member_id'];
 
 $pdo = connect_to_db();
 // 登録あるかを検索
-$sql = 'SELECT*FROM friend_table WHERE member_id=:id';
+$sql = 'SELECT*FROM sien_table WHERE member_id=:id';
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_STR);
 try {
@@ -43,19 +43,19 @@ if (isset($val)) {
     foreach ($val as $record) {
         // var_dump($record);
         // exit();
-        if ($record["friend_id"] == $friend_id) {
-            exit('すでに友達になっています。');
+        if ($record["sien_id"] == $sien_id) {
+            exit('すでに支援対象者になっています。');
             // var_dump($record["friend_id"]);
             // exit();
 
 
         }
     }
-    $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
+    $sql = 'INSERT INTO sien_table(id,member_id,sien_id,sien_check)VALUES(NULL,:id,:sien_id ,:sien_check)';
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_STR);
-    $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
-    $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
+    $stmt->bindValue(':sien_id', $sien_id, PDO::PARAM_STR);
+    $stmt->bindValue(':sien_check', $sien, PDO::PARAM_STR);
     try {
         $status = $stmt->execute();
     } catch (PDOException $e) {
@@ -63,11 +63,11 @@ if (isset($val)) {
         exit();
     }
 } else {
-    $sql = 'INSERT INTO friend_table(id,member_id,friend_id,friend_check)VALUES(NULL,:id,:friend_id ,:friend_check)';
+    $sql = 'INSERT INTO sien_table(id,member_id,sien_id,sien_check)VALUES(NULL,:id,:sien_id ,:sien_check)';
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_STR);
-    $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_STR);
-    $stmt->bindValue(':friend_check', $friend, PDO::PARAM_STR);
+    $stmt->bindValue(':sien_id', $sien_id, PDO::PARAM_STR);
+    $stmt->bindValue(':sien_check', $sien, PDO::PARAM_STR);
     try {
         $status = $stmt->execute();
     } catch (PDOException $e) {
@@ -75,5 +75,5 @@ if (isset($val)) {
         exit();
     }
 }
-header("Location:member_friend_select.php");
+header("Location:sien_select.php");
 exit();

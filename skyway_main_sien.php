@@ -8,7 +8,7 @@ $login_id = $_SESSION['login_id'];
 $login_id_json = json_encode($login_id);
 
 $pdo = connect_to_db();
-$sql = "SELECT friend_table.member_id,mbname,login_id FROM `friend_table` LEFT OUTER JOIN member_table ON friend_table.friend_id=member_table.member_id WHERE friend_table.member_id=$id;";
+$sql = "SELECT sien_table.member_id,mbname,login_id FROM `sien_table` LEFT OUTER JOIN member_table ON sien_table.member_id=member_table.member_id WHERE sien_table.sien_id=$id;";
 $stmt = $pdo->prepare($sql);
 // SQL実行（実行に失敗すると `sql error ...` が出力される）
 try {
@@ -28,7 +28,7 @@ foreach ($result as $record) {
 };
 // var_dump($output);
 // exit;
-$friend = json_encode($output);
+$sien = json_encode($output);
 
 ?>
 
@@ -74,7 +74,7 @@ $friend = json_encode($output);
     <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col text-center">
-                <p class="fs-4">現在テレビ電話ができる友達</p>
+                <p class="fs-4">現在テレビ電話ができる支援者</p>
                 <!-- <ul class="list-group mx-auto" style="max-width: 400px;" id="calling"> -->
                 <!-- </ul> -->
             </div>
@@ -102,6 +102,7 @@ $friend = json_encode($output);
             </div>
         </div>
     </div>
+
     <script>
         let localStream;
 
@@ -138,26 +139,26 @@ $friend = json_encode($output);
             document.getElementById('my-id').textContent = peer.id;
             peer.listAllPeers((peers) => {
                 const peerslist = peers;
+                console.log(peerslist);
                 const peersme = [id];
-                const friend = JSON.parse('<?php echo $friend; ?>');
+                const sien = JSON.parse('<?php echo $sien; ?>');
                 const peerslists = peerslist.filter(item =>
                     peersme.indexOf(item) == -1
                 );
-                const friendmatchs = friend.concat(peerslists)
-                const friendmatch = friendmatchs.filter(function(x, i, self) {
+                const sienmatchs = sien.concat(peerslists)
+                const sienmatch = sienmatchs.filter(function(x, i, self) {
                     return self.indexOf(x) === i && i !== self.lastIndexOf(x);
                 });
-                console.log(friendmatch);
-                // for (i = 0; i < friendmatch.length; i++) {
+                console.log(sienmatch);
+                // for (i = 0; i < sienmatch.length; i++) {
                 //     let li = document.createElement('li');
-                //     li.className = "list-group-item list-group-item-success fs-4";
-                //     li.textContent = friendmatch[i];
+                //     li.textContent = sienmatch[i];
                 //     document.getElementById('calling').appendChild(li);
                 // }
-                for (i = 0; i < friendmatch.length; i++) {
+                for (i = 0; i < sienmatch.length; i++) {
                     let option = document.createElement('option');
                     option.className = "text-center fs-4";
-                    option.textContent = friendmatch[i];
+                    option.textContent = sienmatch[i];
                     document.getElementById('their-id').appendChild(option);
                 }
             });
@@ -190,7 +191,6 @@ $friend = json_encode($output);
 
         //PeerIDlist
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>

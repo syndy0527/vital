@@ -8,7 +8,7 @@ $login_id = $_SESSION['login_id'];
 $login_id_json = json_encode($login_id);
 
 $pdo = connect_to_db();
-$sql = "SELECT friend_table.member_id,mbname,login_id FROM `friend_table` LEFT OUTER JOIN member_table ON friend_table.friend_id=member_table.member_id WHERE friend_table.member_id=$id;";
+$sql = "SELECT sien_table.sien_id,mbname,login_id FROM `sien_table` LEFT OUTER JOIN member_table ON sien_table.sien_id=member_table.member_id WHERE sien_table.member_id=$id;";
 $stmt = $pdo->prepare($sql);
 // SQL実行（実行に失敗すると `sql error ...` が出力される）
 try {
@@ -28,7 +28,7 @@ foreach ($result as $record) {
 };
 // var_dump($output);
 // exit;
-$friend = json_encode($output);
+$sien = json_encode($output);
 
 ?>
 
@@ -42,19 +42,19 @@ $friend = json_encode($output);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_skyway.css">
     <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.3.js"></script>
-    <title>顔を見て話す</title>
+    <title>要支援者と話す</title>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+    <nav class="navbar navbar-light bg-primary bg-opacity-25">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
 
                 <form class="d-flex fs-4">
                     <span class="navbar-text h5 ">
-                        利用者:<?= $_SESSION['mbname'] ?>
+                        支援者:<?= $_SESSION['mbname'] ?>
                     </span>
                     <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
                 </form>
@@ -74,7 +74,7 @@ $friend = json_encode($output);
     <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col text-center">
-                <p class="fs-4">現在テレビ電話ができる友達</p>
+                <p class="fs-4">現在テレビ電話ができる要支援者</p>
                 <!-- <ul class="list-group mx-auto" style="max-width: 400px;" id="calling"> -->
                 <!-- </ul> -->
             </div>
@@ -98,10 +98,11 @@ $friend = json_encode($output);
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="member_kaiwa.php" role="button">友達と話すへ</a>
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="sien_home.php" role="button">支援者ホームへ</a>
             </div>
         </div>
     </div>
+
     <script>
         let localStream;
 
@@ -139,25 +140,24 @@ $friend = json_encode($output);
             peer.listAllPeers((peers) => {
                 const peerslist = peers;
                 const peersme = [id];
-                const friend = JSON.parse('<?php echo $friend; ?>');
+                const sien = JSON.parse('<?php echo $sien; ?>');
                 const peerslists = peerslist.filter(item =>
                     peersme.indexOf(item) == -1
                 );
-                const friendmatchs = friend.concat(peerslists)
-                const friendmatch = friendmatchs.filter(function(x, i, self) {
+                const sienmatchs = sien.concat(peerslists)
+                const sienmatch = sienmatchs.filter(function(x, i, self) {
                     return self.indexOf(x) === i && i !== self.lastIndexOf(x);
                 });
-                console.log(friendmatch);
-                // for (i = 0; i < friendmatch.length; i++) {
+                console.log(sienmatch);
+                // for (i = 0; i < sienmatch.length; i++) {
                 //     let li = document.createElement('li');
-                //     li.className = "list-group-item list-group-item-success fs-4";
-                //     li.textContent = friendmatch[i];
+                //     li.textContent = sienmatch[i];
                 //     document.getElementById('calling').appendChild(li);
                 // }
-                for (i = 0; i < friendmatch.length; i++) {
+                for (i = 0; i < sienmatch.length; i++) {
                     let option = document.createElement('option');
                     option.className = "text-center fs-4";
-                    option.textContent = friendmatch[i];
+                    option.textContent = sienmatch[i];
                     document.getElementById('their-id').appendChild(option);
                 }
             });
@@ -190,7 +190,6 @@ $friend = json_encode($output);
 
         //PeerIDlist
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>
