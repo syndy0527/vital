@@ -1,7 +1,14 @@
 body{
-    background-color: cornsilk;
+  background-color: cornsilk;
 }
 
+main{
+  height: 100vh;
+}
+
+.login{
+  height: 100vh;
+}
 .header{
     display: flex;
     justify-content: space-between;

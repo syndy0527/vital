@@ -6,36 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン画面</title>
-    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style_home.css">
 
 </head>
 
 <body>
-    <div class="home_top">
-        <h1>コミクト</h1>
-    </div>
-    <form action="login_act.php" method="POST">
-        <fieldset class="login">
-            <!-- <legend>ログイン画面</legend> -->
-            <div class="login_date">
-                <p>今日は <span id="date"></span>です</p>
+    <header>
+        <nav class="navbar navbar-dark bg-warning bg-opacity-75">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+                </a>
+                <form class="d-flex fs-4">
+                    <a class="btn btn-outline-danger fs-4 mx-4" href="login.php" role="button">ログイン</a>
+                    <a class="btn btn-outline-danger fs-4 " href="register.php" role="button">新規登録</a>
+                </form>
             </div>
-            <div>
-                <p class="login_text">ログインID</p>
-                <input type="text" name=" logid" class="login_input">
+
+        </nav>
+    </header>
+    <main>
+        <div id="login" class="login">
+            <h2 class="text-center text-secondary pt-5 fs-1 ">ログイン</h2>
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <form id="login-form" class="form" action="login_act.php" method="POST">
+                                <h3 class="text-center my-3 text-black">今日は <span id="date"></span>です</h3>
+                                <div class="form-group">
+                                    <label for="username" class="text-secondary fs-3 mt-3">ログインID:</label><br>
+                                    <input type="text" name=" logid" id="username" class="form-control fs-3 ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="text-secondary fs-3 mt-3">パスワード:</label><br>
+                                    <input type="password" name="password" id="password" class="form-control fs-3">
+                                </div>
+                                <div class="form-group d-grid gap-2 col-6 mx-auto">
+                                    <!-- <label for="remember-me" class="text-secondary fs-3 my-3"><span>パスワードを記録する</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
+                                    <input type="submit" name="submit" class="btn btn-danger btn-md fs-3 my-4 " value="ログインする">
+                                </div>
+                                <div id="register-link" class="text-right fs-3 my-3">
+                                    <p>登録をされていない方は、<a href="register.php" class="text-info text-danger fs-3">新規登録へ</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p class="login_text">パスワード</p>
-                <input type="password" name="password" class="login_input">
-            </div>
-            <div class="login_button">
-                <button class="button">Login</button>
-            </div>
-            <div class="login_new">
-                <p>登録をされていない方は、<a href="register.php">新規登録へ</a></p>
-            </div>
-        </fieldset>
-    </form>
+        </div>
+    </main>
+    <footer class="container-fluid bg-secondary w-200 text-light text-center fs-5 mt-5">
+        <p class="pb-3">&copy;2022 syndy </p>
+    </footer>
     <script>
         const now = new Date()
         const month = now.getMonth()

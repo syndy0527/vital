@@ -48,55 +48,99 @@ check_session_id();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>バイタルデータ入力</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="home_head">
-            <p>利用者:<?= $_SESSION['mbname'] ?></p>
-        </div>
-        <div class="home_head_text">
-            <p><a href="logout.php">ログアウト</a></p>
-        </div>
-    </header>
-    <form action="vital_create.php" method="POST">
-        <fieldset>
-            <legend>バイタルデータ入力</legend>
-            <div>
-                利用者：<?= $_SESSION['mbname'] ?>
-            </div>
-            <div>
-                記録日：<input type="date" name="record_date">
-            </div>
-            <div>
-                体温：<input type="number" step="0.1" name="taion">℃
-            </div>
-            <div>
-                血圧：<input type="number" name="ketuatu_up"> / <input type="number" name="ketuatu_down">
-            </div>
-            <div>
-                脈拍：<input type="number" name="myakuhaku">回／分
-            </div>
-            <div>
-                体重：<input type="number" step="0.1" name="wight">kg
-            </div>
-            <div>
-                水分摂取：<input type="nember" name="suibun">ml
-            </div>
-            <div>
-                服薬：<label><input type="radio" name="fukuyaku" value="1">飲んだ</label> <label><input type="radio" name="fukuyaku" value="2">飲んでない</label>
-            </div>
+    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
 
-            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
-            <div>
-                <button>submit</button>
+                <form class="d-flex fs-4">
+                    <span class="navbar-text h5 ">
+                        利用者:<?= $_SESSION['mbname'] ?>
+                    </span>
+                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                </form>
+        </div>
+    </nav>
+    <form action="vital_create.php" method="POST">
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">バイタルデータ入力</p>
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class=" input-group-text fs-5 " id="inputGroup-sizing-default">記録日</span>
+                    <input type="date" name="record_date" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
             </div>
-        </fieldset>
+            <div class="row justify-content-center  g-2">
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">体温</span>
+                    <input type="number" step="0.1" name="taion" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="input-group-text">℃</span>
+                </div>
+            </div>
+            <div class="row justify-content-center  g-2">
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">血圧</span>
+                    <input type="number" name="ketuatu_up" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="input-group-text">／</span>
+                    <input type="number" name="ketuatu_down" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">脈拍</span>
+                        <input type="number" name="myakuhaku" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <span class="input-group-text">回／分</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">体重</span>
+                        <input type="number" step="0.1" name="wight" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <span class="input-group-text">kg</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">水分接種</span>
+                        <input type="number" name="suibun" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <span class="input-group-text">ml</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">服薬状況</span>
+                        <label class="input-group-text fs-5" for="">飲んだ</label>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="checkbox" name="fukuyaku" value="1" aria-label="Checkbox for following text input">
+                        </div>
+                        <label class="input-group-text fs-5" for="">飲んでない</label>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="checkbox" name="fukuyaku" value="2" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col text-center mb-5">
+                            <button class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px">登 録</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col text-center ">
+                        <a class="btn btn-secondary btn-lg fs-5 mx-4 my-4" style="width: 200px;;height:50px" href="vital_check.php" role="button">健康チェックへ</a>
+                        <a class="btn btn-secondary btn-lg fs-5 mx-4 my-4" style="width: 200px;;height:50px" href="vital_read.php" role="button">健康情報一覧へ</a>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
     </form>
-    <div class="top">
-        <a class="gohome" href=" vital_check.php"><span>健康チェックへ</span></a>
-    </div>
 </body>
 
 </html>

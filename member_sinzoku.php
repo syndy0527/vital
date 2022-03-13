@@ -35,63 +35,88 @@ foreach ($val as $record) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>親族登録</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="home_head">
-            <p>利用者:<?= $_SESSION['mbname'] ?></p>
-        </div>
-        <div class="home_head_text">
-            <p><a href="logout.php">ログアウト</a></p>
-        </div>
-    </header>
-    <form action="member_sinzoku_update.php" method="POST">
-        <fieldset>
-            <legend>親族登録</legend>
-            <a href="member_input.php">基本情報入力</a>
-            <div>
-                利用者：<?= $_SESSION['mbname'] ?>
-            </div>
-            <div>
-                親族名前: <input type="text" name="sinzokuname">
-            </div>
-            <div>
-                親族住所: <input type="text" name="sinzokuadd">
-            </div>
-            <div>
-                親族続柄: <input type="text" name="sinzokugara">
-            </div>
-            <div>
-                親族TEL: <input type="tel" name="sinzokutel">
-            </div>
-            </div>
+    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
 
-            <input type="hidden" name="id" value="<?= $memberid ?>">
-            <div>
-                <button>submit</button>
+                <form class="d-flex fs-4">
+                    <span class="navbar-text h5 ">
+                        利用者:<?= $_SESSION['mbname'] ?>
+                    </span>
+                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                </form>
+        </div>
+    </nav>
+    <form action="member_sinzoku_update.php" method="POST">
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">親族登録</p>
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">親族氏名</span>
+                    <input type="text" name="sinzokuname" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">親族住所</span>
+                        <input type="text" name="sinzokuadd" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">親族続柄</span>
+                        <input type="text" name="sinzokugara" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">親族TEL</span>
+                        <input type="text" name="sinzokutel" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col text-center mb-5">
+                        <button class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px">登 録</button>
+                    </div>
+                </div>
             </div>
             <div>
-                <table border="1">
+                <input type="hidden" name="id" value="<?= $memberid ?>">
+            </div>
+    </form>
+    <div class="container-fluid">
+        <div class="row justify-content-center  g-2">
+            <p class="h2 text-center my-5">登録親族一覧</p>
+            <div class="table-responsive">
+                <table class="table table-secondary table-hover mx-auto fs-5" style="max-width: 1000px;">
                     <thead>
                         <tr>
-                            <th>親族名前</th>
-                            <th>親族住所</th>
-                            <th>親族続柄</th>
-                            <th>親族TEL</th>
+                            <th scope="col">親族氏名</th>
+                            <th scope="col">親族住所</th>
+                            <th scope="col">親族続柄</th>
+                            <th scope="col">親族TEL</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?= $output ?>
                     </tbody>
                 </table>
-
-        </fieldset>
-    </form>
-    <div class="top">
-        <a class="gohome" href=" member_input.php"><span>基本情報入力へ</span></a>
+            </div>
+        </div>
     </div>
-</body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="member_input.php" role="button">基本情報入力へ</a>
+            </div>
+        </div>
+    </div>
 
 </html>

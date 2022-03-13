@@ -151,7 +151,7 @@ if (
 // var_dump($result1['member_id']);
 // echo '<pre>';
 // exit();
-$output3 = "<p> 登録状況：{$result1['belongs']} / {$result1['mbname']}</p>";
+$output3 = "{$result1['belongs']} / {$result1['mbname']}";
 
 // ケアマネ登録状況
 $sql = "SELECT  result1_table.member_id,result1_table.mbname,belongs FROM (SELECT result_table.member_id,result_table.mbname,belongs_id FROM (SELECT medical_table.member_id,medical_table.caremane,caredocter,mbname FROM `medical_table` LEFT OUTER JOIN member_table ON medical_table.caredocter=member_table.member_id) AS result_table LEFT OUTER JOIN supporter_table ON result_table.caredocter=supporter_table.member_id) AS result1_table LEFT OUTER JOIN belongs_table ON result1_table.belongs_id=belongs_table.belongs_id WHERE member_id=:id;";
@@ -173,7 +173,7 @@ if (
     $result3['member_id'] = NULL;
     $result3['belongs'] = NULL;
 }
-$output5 = "<p> 登録状況：{$result3['belongs']} / {$result3['mbname']}</p>";
+$output5 = "{$result3['belongs']} / {$result3['mbname']}";
 ?>
 
 <!DOCTYPE html>
@@ -184,60 +184,110 @@ $output5 = "<p> 登録状況：{$result3['belongs']} / {$result3['mbname']}</p>"
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>医療情報登録</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_home.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="home_head">
-            <p>利用者:<?= $_SESSION['mbname'] ?></p>
+    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+
+                <form class="d-flex fs-4">
+                    <span class="navbar-text h5 ">
+                        利用者:<?= $_SESSION['mbname'] ?>
+                    </span>
+                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                </form>
         </div>
-        <div class="home_head_text">
-            <p><a href="logout.php">ログアウト</a></p>
-        </div>
-    </header>
+    </nav>
     <form action="member_medical_update.php" method="POST">
-        <fieldset>
-            <legend>医療情報登録</legend>
-            <a href="member_input.php">基本情報入力</a>
-            <div>
-                利用者：<?= $_SESSION['mbname'] ?>
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">医療情報登録</p>
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">介護認定</span>
+                    <select class="form-select fs-5" name="kaigonintei" id="">
+                        <?= $output ?>
+                    </select>
+                    <form>
+                        <fieldset disabled class="input-group justify-content-center">
+                            <div class="input-group justify-content-center" style="max-width: 400px;">
+                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                <input type="text" class="form-control fs-5 " placeholder="<?= $kaigo1["kaigonintei"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">障がい認定</span>
+                        <select class="form-select fs-5" name="shougai" id="">
+                            <?= $output1 ?>
+                        </select>
+                        <form>
+                            <fieldset disabled class="input-group justify-content-center" style="max-width: 400px;">
+                                <div class="input-group justify-content-center">
+                                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                    <input type="text" class="form-control fs-5 " placeholder="<?= $shougai1["shougai"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 450px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">ケアマネジャー</span>
+                        <select class="form-select fs-5" name="caremane" id="">
+                            <?= $output2 ?>
+                        </select>
+                        <form>
+                            <fieldset disabled class="input-group justify-content-center" style="max-width: 450px;">
+                                <div class="input-group justify-content-center">
+                                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                    <input type="text" class="form-control fs-5 " placeholder="<?= $output3 ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 450px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">かかりつけ医師</span>
+                        <select class="form-select fs-5" name="pcd" id="">
+                            <?= $output4 ?>
+                        </select>
+                        <form>
+                            <fieldset disabled class="input-group justify-content-center" style="max-width: 450px;">
+                                <div class="input-group justify-content-center">
+                                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                    <input type="text" class="form-control fs-5 " placeholder="<?= $output5 ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col text-center mb-5">
+                            <button class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px">登 録</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" name="id" value="<?= $_SESSION['member_id'] ?>">
+                </div>
             </div>
-            <div>
-                介護認定: <select name="kaigonintei" id="">
-                    <?= $output ?>
-                </select>
-                <p> 登録状況：<?= $kaigo1["kaigonintei"] ?></p>
-            </div>
-            <div>
-                障がい認定: <select name="shougai" id="">
-                    <?= $output1 ?>
-                </select>
-                <p> 登録状況：<?= $shougai1["shougai"] ?></p>
-            </div>
-            <div>
-                ケアマネジャー: <select name="caremane" id="">
-                    <?= $output2 ?>
-                </select>
-                <?= $output3 ?>
-            </div>
-            <div>
-                かかりつけ医師: <select name="pcd" id="">
-                    <?= $output4 ?>
-                </select>
-                <?= $output5 ?>
-            </div>
-            </div>
-
-            <input type="hidden" name="id" value="<?= $_SESSION['member_id'] ?>">
-            <div>
-                <button>submit</button>
-            </div>
-        </fieldset>
-        <div class="top">
-            <a class="gohome" href=" member_input.php"><span>基本情報入力へ</span></a>
         </div>
-
+    </form>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="member_input.php" role="button">基本情報入力へ</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
