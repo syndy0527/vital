@@ -58,8 +58,10 @@
             </div>
         </div>
     </main>
-    <footer class="container-fluid bg-secondary w-200 text-light text-center fs-5 mt-5">
-        <p class="pb-3">&copy;2022 syndy </p>
+    <footer class="footer bg-secondary text-light text-center fs-5 mt-auto py-2">
+        <div class="container">
+            <p>&copy;2022 syndy </p>
+        </div>
     </footer>
     <script>
         const now = new Date()

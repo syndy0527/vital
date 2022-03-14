@@ -32,21 +32,42 @@ check_session_id();
     <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col text-center my-5">
-                <p class="h2">ー 管理者ホーム ー</p>
+                <p class="h2">ー テーブル追加・変更 ー</p>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row justify-content-center  ">
             <div class="col text-center my-5">
-                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="member_read.php" role="button">利用者情報照会</a>
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="admin_supporttable_read.php" role="button">支援者区分</a>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row justify-content-center  ">
             <div class="col text-center my-5">
-                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="admin_tableadd.php" role="button">テーブル変更・追加</a>
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="admin_belongs_read.php" role="button">所属区分</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center  ">
+            <div class="col text-center my-5">
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="admin_kaigo_read.php" role="button">介護区分</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center  ">
+            <div class="col text-center my-5">
+                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="admin_shougai_read.php" role="button">障がい区分</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="admin_home.php" role="button">管理者ホームへ</a>
             </div>
         </div>
     </div>

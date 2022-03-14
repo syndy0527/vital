@@ -10,7 +10,7 @@ session_start();
 check_session_id();
 $pdo = connect_to_db();
 // SQL実行
-$sql = 'SELECT * FROM member_table WHERE member_id=:id';
+$sql = 'SELECT * FROM belongs_table WHERE id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -22,8 +22,6 @@ try {
 }
 
 $record = $stmt->fetch(PDO::FETCH_ASSOC);
-// var_dump($record);
-// exit();
 ?>
 
 <!DOCTYPE html>
@@ -52,18 +50,16 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
                 </form>
         </div>
     </nav>
-    <form action="member_update.php" method="POST">
+    <form action="admin_belongs_update.php" method="POST">
         <div class="container-fluid">
             <div class="row justify-content-center  g-2">
-                <p class="h2 text-center my-5">利用者登録情報変更</p>
+                <p class="h2 text-center my-5">支援者区分変更</p>
                 <div class="input-group my-4 justify-content-center" style="max-width: 400px;">
-                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">住所</span>
-                    <input type="text" name="mbaddress" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     <form>
                         <fieldset disabled class="input-group justify-content-center" style="max-width: 400px;">
                             <div class="input-group justify-content-center">
-                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
-                                <input type="text" class="form-control fs-5 " placeholder="<?= $record["mbaddress"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">ID</span>
+                                <input type="text" class="form-control fs-5 " placeholder="<?= $record["belongs_id"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </fieldset>
                     </form>
@@ -71,34 +67,14 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="row justify-content-center  g-2">
                 <div class="input-group my-4 justify-content-center" style="max-width: 400px;">
-                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">利用者区分</span>
-                    <select class="form-select fs-5" name="admin" id="">
-                        <option value="0">一般</option>
-                        <option value="1">支援者</option>
-                        <option value="2">管理者</option>
-                    </select>
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">支援者区分</span>
+                    <input type="text" name="belongs" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     <form>
                         <fieldset disabled class="input-group justify-content-center" style="max-width: 400px;">
                             <div class="input-group justify-content-center">
                                 <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
-                                <span class="input-group-text fs-5" id="admin"></span>
+                                <input type="text" class="form-control fs-5 " placeholder="<?= $record["belongs"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-center  g-2">
-                <div class="input-group my-4 justify-content-center" style="max-width: 400px;">
-                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">停止区分</span>
-                    <select class="form-select fs-5" name="delete" id="">
-                        <option value="0">利用中</option>
-                        <option value="1">利用停止</option>
-                    </select>
-                    <form>
-                        <fieldset disabled class="input-group justify-content-center" style="max-width: 400px;">
-                            <div class="input-group justify-content-center">
-                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
-                                <span class="input-group-text fs-5" id="delete"></span>
                         </fieldset>
                     </form>
                 </div>
@@ -111,34 +87,17 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
                 </div>
             </div>
             <div>
-                <input type="hidden" name="id" value="<?= $record["member_id"] ?>">
+                <input type="hidden" name="id" value="<?= $record["id"] ?>">
             </div>
         </div>
     </form>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="member_read.php" role="button">利用者情報照会へ</a>
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 250px;;height:50px" href="admin_belongs_read.php" role="button">支援者区分変更・追加へ</a>
             </div>
         </div>
     </div>
-    <script>
-        const admin = <?= $record["is_admin"] ?>;
-        if (admin === 0) {
-            document.getElementById("admin").textContent = "一般";
-        } else if (admin === 1) {
-            document.getElementById("admin").textContent = "支援者";
-        } else if (admin === 2) {
-            document.getElementById("admin").textContent = "管理者";
-        }
-        // console.log(admin);
-        const isdelete = <?= $record["is_dalete"] ?>;
-        if (isdelete === 0) {
-            document.getElementById("delete").textContent = "利用中";
-        } else if (isdelete === 1) {
-            document.getElementById("delete").textContent = "利用停止";
-        }
-    </script>
 </body>
 
 </html>

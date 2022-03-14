@@ -9,7 +9,7 @@ check_session_id();
 $pdo = connect_to_db();
 
 
-$sql = 'SELECT * FROM member_table ORDER BY member_id ASC';
+$sql = 'SELECT * FROM support_table ORDER BY support_id ASC';
 
 $stmt = $pdo->prepare($sql);
 
@@ -29,16 +29,12 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // exit();
 $output = "";
 foreach ($result as $record) {
-    $output .= "<tr><td>{$record['member_id']}</td><td>{$record['mbname']}</td><td>{$record['seibetu']}</td><td>{$record['barthday']}</td><td>{$record['mbaddress']}</td><td>{$record['is_admin']}</td><td>{$record['is_dalete']}</td>
+    $output .= "<tr><td>{$record['support_id']}</td><td>{$record['support']}</td>
     <td>
-        <a href='member_edit.php?id={$record["member_id"]}' class='btn btn-success' role='button'>変更</a>
-      </td>
-      <td>
-        <a href='member_delete.php?id={$record["member_id"]}' class='btn btn-success' role='button'>削除</a>
+        <a href='admin_supporttable_edit.php?id={$record["id"]}' class='btn btn-success' role='button'>変更</a>
       </td><tr>";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -65,22 +61,39 @@ foreach ($result as $record) {
                 </form>
         </div>
     </nav>
+    <form action="admin_supporttable_create.php" method="POST">
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">支援区分テーブル追加・変更</p>
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default" style="width: 106px;">ID</span>
+                    <input type="text" name="id" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="row justify-content-center  g-2">
+                    <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                        <span class="input-group-text fs-5" id="inputGroup-sizing-default">支援者区分</span>
+                        <input type="text" name="support" class="form-control fs-5 " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col text-center mb-5">
+                        <button class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px">新規追加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <div class="container-fluid">
         <div class="row justify-content-center  g-2">
-            <p class="h2 text-center my-5">利用者情報照会・変更</p>
             <div class="table-responsive">
-                <table class="table table-success table-hover mx-auto fs-5" style="max-width: 1000px;">
+                <table class="table table-success table-hover mx-auto fs-5" style="max-width: 500px;">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">名前</th>
-                            <th scope="col">性別</th>
-                            <th scope="col">生年月日</th>
-                            <th scope="col">住所</th>
-                            <th scope="col">利用者区分</th>
-                            <th scope="col">停止区分</th>
+                            <th scope="col">支援者区分</th>
                             <th scope="col">変更</th>
-                            <th scope="col">削除</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +106,7 @@ foreach ($result as $record) {
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="admin_home.php" role="button">管理者ホームへ</a>
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="admin_tableadd.php" role="button">テーブル変更・追加へ</a>
             </div>
         </div>
     </div>

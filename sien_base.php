@@ -74,7 +74,7 @@ $output2 = "";
 foreach ($result as $record2) {
     // var_dump($record2["support"]);
     // exit();
-    $output2 .= "<p> 登録状況：{$record2["support"]}</p>";
+    $output2 .= "{$record2["support"]}";
 }
 ?>
 <!DOCTYPE html>
@@ -85,46 +85,78 @@ foreach ($result as $record2) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>支援者基本情報登録・変更</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style_home_sien.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="home_head">
-            <p>支援者:<?= $_SESSION['mbname'] ?></p>
+    <nav class="navbar navbar-light bg-primary bg-opacity-25">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+
+                <form class="d-flex fs-4">
+                    <span class="navbar-text h5 ">
+                        支援者:<?= $_SESSION['mbname'] ?>
+                    </span>
+                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                </form>
         </div>
-        <div class="home_head_text">
-            <p><a href="logout.php">ログアウト</a></p>
-        </div>
-    </header>
+    </nav>
     <form action="sien_create.php" method="POST">
-        <fieldset>
-            <legend>支援者基本情報登録・変更</legend>
-            <div>
-                <P>氏名：<?= $_SESSION['mbname'] ?></P>
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">支援者基本情報登録・変更</p>
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">支援区分</span>
+                    <select class="form-select fs-5" name="sienkubun" id="">
+                        <?= $output ?>
+                    </select>
+                    <form>
+                        <fieldset disabled class="input-group justify-content-center" style="max-width: 400px;">
+                            <div class="input-group justify-content-center">
+                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                <input type="text" class="form-control fs-5 " placeholder="<?= $output2 ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-center  g-2">
+                <div class="input-group mb-3 justify-content-center" style="max-width: 400px;">
+                    <span class="input-group-text fs-5" id="inputGroup-sizing-default">所属</span>
+                    <select class="form-select fs-5" name="belongs" id="">
+                        <?= $output1 ?>
+                    </select>
+                    <form>
+                        <fieldset disabled class="input-group justify-content-center" style="max-width: 450px;">
+                            <div class="input-group justify-content-center">
+                                <span class="input-group-text fs-5" id="inputGroup-sizing-default">登録状況</span>
+                                <input type="text" class="form-control fs-5 " placeholder="<?= $record2["belongs"] ?>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col text-center mb-5">
+                        <button class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px">登 録</button>
+                    </div>
+                </div>
             </div>
             <div>
-                支援区分：<select name="sienkubun">
-                    <?= $output ?>
-                </select>
-                <?= $output2  ?>
+                <input type="hidden" name="id" value="<?= $_SESSION['member_id'] ?>">
             </div>
-            <div>
-                所属：<select name="belongs">
-                    <?= $output1  ?>
-                </select>
-                <p> 登録状況：<?= $record2["belongs"] ?></p>
-            </div>
-            <div>
-                <button>submit</button>
-            </div>
-            <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
-            <div>
-            </div>
-        </fieldset>
+        </div>
+        </div>
     </form>
-    <div class="top">
-        <a class="gohome" href=" sien_home.php"><span>ホーム画面へ</span></a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col text-center my-5">
+                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="sien_home.php" role="button">支援者ホームへ</a>
+            </div>
+        </div>
     </div>
 </body>
 
