@@ -158,6 +158,11 @@ foreach ($result as $record2) {
             </div>
         </div>
     </div>
+    <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
+        <div class="container">
+            <p>&copy;2022 syndy </p>
+        </div>
+    </footer>
 </body>
 
 </html>

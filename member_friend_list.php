@@ -76,6 +76,11 @@ foreach ($result as $record) {
             </div>
         </div>
     </div>
+    <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
+        <div class="container">
+            <p>&copy;2022 syndy </p>
+        </div>
+    </footer>
     <!-- <fieldset>
         <legend>友達一覧</legend>
         <a href="member_kaiwa.php">友達と話すへ</a>

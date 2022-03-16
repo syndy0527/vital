@@ -141,6 +141,11 @@ check_session_id();
             </div>
             <input type="hidden" name="id" value="<?= $_SESSION['member_id']  ?>">
     </form>
+    <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
+        <div class="container">
+            <p>&copy;2022 syndy </p>
+        </div>
+    </footer>
 </body>
 
 </html>

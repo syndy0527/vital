@@ -63,7 +63,7 @@ $sien = json_encode($output);
     <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col-sm-6 text-center my-3">
-                <video id="their-video" autoplay muted playsinline class="img-fluid"></video>
+                <video id="their-video" autoplay playsinline class="img-fluid"></video>
             </div>
             <div class="col-sm-6 text-center my-3">
                 <video id="my-video" autoplay muted playsinline class="img-fluid"></video>
@@ -102,6 +102,11 @@ $sien = json_encode($output);
             </div>
         </div>
     </div>
+    <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
+        <div class="container">
+            <p>&copy;2022 syndy </p>
+        </div>
+    </footer>
 
     <script>
         let localStream;
@@ -109,7 +114,19 @@ $sien = json_encode($output);
         // カメラ映像取得
         navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: true
+                audio: {
+                    sampleRate: {
+                        ideal: 48000
+                    },
+                    channelCount: {
+                        ideal: 2,
+                        min: 1
+                    },
+                    autoGainControl: true,
+                    echoCancellation: true,
+                    echoCancellationType: 'system',
+                    noiseSuppression: false
+                }
             })
             .then(stream => {
                 // 成功時にvideo要素にカメラ映像をセットし、再生
