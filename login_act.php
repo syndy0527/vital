@@ -11,11 +11,11 @@ $password = $_POST['password'];
 $pdo = connect_to_db();
 
 // username，password，is_deletedの3項目全てを満たすデータを抽出する．
-$sql = 'SELECT * FROM member_table WHERE login_id=:logid AND password=:password AND is_dalete=0';
+$sql = 'SELECT * FROM member_table WHERE login_id=:logid AND is_dalete=0';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':logid', $logid, PDO::PARAM_STR);
-$stmt->bindValue(':password', $password, PDO::PARAM_STR);
+// $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 
 try {
     $status = $stmt->execute();
@@ -26,11 +26,7 @@ try {
 
 $val = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$val) {
-    echo "<p>ログイン情報に誤りがあります</p>";
-    echo "<a href=login.php>ログイン</a>";
-    exit();
-} else {
+if (password_verify($password, $val['password'])) {
     $_SESSION = array();
     $_SESSION['session_id'] = session_id();
     $_SESSION['is_admin'] = $val['is_admin'];
@@ -48,4 +44,8 @@ if (!$val) {
         header("Location:admin_home.php");
         exit();
     }
+} else {
+    echo "<p>ログイン情報に誤りがあります</p>";
+    echo "<a href=login.php>ログイン</a>";
+    exit();
 }

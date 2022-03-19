@@ -12,6 +12,9 @@ if (
 $mbname = $_POST["mbname"];
 $logid = $_POST["logid"];
 $password = $_POST["password"];
+$password_after = password_hash($password, PASSWORD_DEFAULT);
+// var_dump($password_after);
+// exit();
 
 include('functions.php');
 $pdo = connect_to_db();
@@ -34,12 +37,13 @@ if ($stmt->fetchColumn() > 0) {
     exit();
 } else {
 
+
     $sql = 'INSERT INTO member_table(member_id,mbname,login_id,password,is_admin,is_dalete,seibetu,barthday,mbaddress,created_at,update_at)VALUES(NULL,:mbname ,:logid, :password,0, 0,0,0,0, now(), now())';
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':mbname', $mbname, PDO::PARAM_STR);
     $stmt->bindValue(':logid', $logid, PDO::PARAM_STR);
-    $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+    $stmt->bindValue(':password', $password_after, PDO::PARAM_STR);
 
     try {
         $status = $stmt->execute();
