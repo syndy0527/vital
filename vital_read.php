@@ -26,6 +26,8 @@ $val = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $output = "";
 foreach ($val as $record) {
+    // var_dump($record['record_date']);
+    // exit();
     $fukuyaku = "";
     if ($record['fukuyaku'] == 1) {
         $fukuyaku .= "飲んだ";
@@ -48,55 +50,282 @@ foreach ($val as $record) {
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-danger bg-opacity-25">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+    <header>
+        <nav class="navbar navbar-light bg-danger bg-opacity-25">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
 
-                <form class="d-flex fs-4">
-                    <span class="navbar-text h5 ">
-                        利用者:<?= $_SESSION['mbname'] ?>
-                    </span>
-                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
-                </form>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row justify-content-center  g-2">
-            <p class="h2 text-center my-5">健康情報一覧</p>
-            <div class="table-responsive">
-                <table class="table table-secondary table-hover mx-auto fs-5" style="max-width: 1000px;">
-                    <thead>
-                        <tr>
-                            <th scope="col">登録日</th>
-                            <th scope="col">体温</th>
-                            <th scope="col">血圧</th>
-                            <th scope="col">脈拍</th>
-                            <th scope="col">体重</th>
-                            <th scope="col">水分量</th>
-                            <th scope="col">服薬状況</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?= $output ?>
-                    </tbody>
-                </table>
+                    <form class="d-flex fs-4">
+                        <span class="navbar-text h5 ">
+                            利用者:<?= $_SESSION['mbname'] ?>
+                        </span>
+                        <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
+                    </form>
+            </div>
+        </nav>
+    </header>
+    <main class="mb-5">
+        <div class="container-fluid">
+            <div class="row justify-content-center  g-2">
+                <p class="h2 text-center my-5">健康情報一覧</p>
+                <div class="table-responsive">
+                    <table class="table table-secondary table-hover mx-auto fs-5" style="max-width: 960px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">登録日</th>
+                                <th scope="col">体温</th>
+                                <th scope="col">血圧</th>
+                                <th scope="col">脈拍</th>
+                                <th scope="col">体重</th>
+                                <th scope="col">水分量</th>
+                                <th scope="col">服薬状況</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?= $output ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="vital_check.php" role="button">健康チェックへ</a>
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="vital.php" role="button">健康情報登録へ</a>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center ms-3 my-5 bg-light bg-opacity-50">
+                    <div id="canvas-container">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="col text-center ms-3 my-5 bg-light bg-opacity-50">
+                    <div id="canvas-container">
+                        <canvas id="myChart1"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center ms-3 my-5 bg-light bg-opacity-50">
+                    <div id="canvas-container">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <div class="col text-center ms-3 my-5 bg-light bg-opacity-50">
+                    <div id="canvas-container">
+                        <canvas id="myChart3"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center ms-3 my-5 bg-light bg-opacity-50">
+                    <div id="canvas-container">
+                        <canvas id="myChart4"></canvas>
+                    </div>
+                </div>
+                <div class="col text-center ms-3 my-5">
+                    <div id="canvas-container">
+                        <canvas id="myChart5"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center my-5">
+                    <a class="btn btn-secondary btn-lg fs-5 ms-5 my-3" style="width: 200px;;height:50px" href="vital_check.php" role="button">健康チェックへ</a>
+                    <a class="btn btn-secondary btn-lg fs-5 ms-5 my-3" style="width: 200px;;height:50px" href="vital.php" role="button">健康情報登録へ</a>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
         <div class="container">
             <p>&copy;2022 syndy </p>
         </div>
     </footer>
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
+    <script>
+        let data_array = <?php echo json_encode($val); ?>;
+        date_array = [];
+        taion_array = [];
+        ketuatu_up_array = [];
+        ketuatu_down_array = [];
+        myakuhaku_array = [];
+        wight_array = [];
+        suibun_array = [];
+        for (let i = 0; i < data_array.length; i++) {
+            date_array.push(data_array[i].record_date);
+            taion_array.push(data_array[i].taion);
+            ketuatu_up_array.push(data_array[i].ketuatu_up);
+            ketuatu_down_array.push(data_array[i].ketuatu_down);
+            myakuhaku_array.push(data_array[i].myakuhaku);
+            wight_array.push(data_array[i].wight);
+            suibun_array.push(data_array[i].suibun);
+        }
+        console.log(data_array);
+        console.log(date_array);
+        console.log(taion_array);
+        console.log(ketuatu_up_array);
+        console.log(ketuatu_down_array);
+        console.log(myakuhaku_array);
+        console.log(wight_array);
+        console.log(suibun_array);
+
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: '体温',
+                    data: taion_array,
+                    borderColor: "rgba(255,0,0,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }, ],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '気温（8月1日~8月7日）'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 40,
+                            suggestedMin: 30,
+                            stepSize: 0.5,
+                            maxTicksLimit: 7
+
+                        }
+                    }]
+                },
+            }
+        });
+
+        var ctx = document.getElementById("myChart1");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: '血圧（上）',
+                    data: ketuatu_up_array,
+                    borderColor: "rgba(0,155,198,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }, {
+                    label: '血圧（下）',
+                    data: ketuatu_down_array,
+                    borderColor: "rgba(122,203,225,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '気温（8月1日~8月7日）'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 40,
+                            suggestedMin: 30,
+                            stepSize: 0.5,
+
+                        }
+                    }]
+                },
+            }
+        });
+        var ctx = document.getElementById("myChart2");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: '脈拍',
+                    data: myakuhaku_array,
+                    borderColor: "rgba(153,68,204,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '気温（8月1日~8月7日）'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 40,
+                            suggestedMin: 30,
+                            stepSize: 0.5,
+
+                        }
+                    }]
+                },
+            }
+        });
+        var ctx = document.getElementById("myChart3");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: '体重',
+                    data: wight_array,
+                    borderColor: "rgba(51,153,0,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '気温（8月1日~8月7日）'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 40,
+                            suggestedMin: 30,
+                            stepSize: 0.5,
+
+                        }
+                    }]
+                },
+            }
+        });
+        var ctx = document.getElementById("myChart4");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date_array,
+                datasets: [{
+                    label: '水分量',
+                    data: suibun_array,
+                    borderColor: "rgba(58,172,173,1)",
+                    backgroundColor: "rgba(0,0,0,0)"
+                }],
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '気温（8月1日~8月7日）'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMax: 40,
+                            suggestedMin: 30,
+                            stepSize: 100,
+
+                        }
+                    }]
+                },
+            }
+        });
+    </script>
 </body>
 
 </html>
