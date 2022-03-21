@@ -14,17 +14,33 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-dark bg-warning bg-opacity-75">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-warning bg-opacity-75">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+                    <img src="img/comictlogo.png" alt="" width="250" height="60" class="d-inline-block align-text-top">
                 </a>
-                <form class="d-flex fs-4">
-                    <a class="btn btn-outline-danger fs-4 mx-4" href="login.php" role="button">ログイン</a>
-                    <a class="btn btn-outline-danger fs-4 " href="register.php" role="button">新規登録</a>
-                </form>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger text-decoration-underline fw-bold fs-4" href="register.php">新規登録</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger text-decoration-underline fw-bold fs-4 " href="password_reset.php">パスワード変更</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
         </nav>
     </header>
     <main>
@@ -49,10 +65,10 @@
                                     <input type="submit" name="submit" class="btn btn-danger btn-md fs-3 my-4 " value="ログインする">
                                 </div>
                                 <div id="register-link" class="text-right fs-3 my-3">
-                                    <p>登録をされていない方は、<a href="register.php" class="text-info text-danger fs-3">新規登録へ</a></p>
+                                    <p>登録をされていない方は、<a href="register.php" class="text-primary  fs-3">新規登録へ</a></p>
                                 </div>
                                 <div id="register-link" class="text-right fs-3 my-3">
-                                    <p>パスワードを忘れた方は、<a href="password_reset.php" class="text-info text-danger fs-3">パスワード変更へ</a></p>
+                                    <p>パスワードを忘れた方は、<a href="password_reset.php" class="text-primary fs-3">パスワード変更へ</a></p>
                                 </div>
                             </form>
                         </div>
@@ -66,6 +82,7 @@
             <p>&copy;2022 syndy </p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
         const now = new Date()
         const month = now.getMonth()
@@ -77,6 +94,7 @@
         document.getElementById("date").textContent = output;
         console.log(output)
     </script>
+
 </body>
 
 

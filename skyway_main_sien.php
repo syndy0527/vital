@@ -47,61 +47,80 @@ $sien = json_encode($output);
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-danger bg-opacity-25">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-danger bg-opacity-25">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="img/comictlogo.png" alt="" width="250" height="60" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold fs-4" href="#">利用者:<?= $_SESSION['mbname'] ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-secondary text-white fs-5 " href="logout.php" role="button">ログアウト</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="mb-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+            <div class="row justify-content-center ">
+                <div class="col-sm-6 text-center my-3">
+                    <video id="their-video" autoplay playsinline class="img-fluid"></video>
+                </div>
+                <div class="col-sm-6 text-center my-3">
+                    <video id="my-video" autoplay muted playsinline class="img-fluid"></video>
+                </div>
+            </div>
+        </div>
 
-                <form class="d-flex fs-4">
-                    <span class="navbar-text h5 ">
-                        利用者:<?= $_SESSION['mbname'] ?>
-                    </span>
-                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
-                </form>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row justify-content-center ">
-            <div class="col-sm-6 text-center my-3">
-                <video id="their-video" autoplay playsinline class="img-fluid"></video>
-            </div>
-            <div class="col-sm-6 text-center my-3">
-                <video id="my-video" autoplay muted playsinline class="img-fluid"></video>
+        <div class="container-fluid">
+            <div class="row justify-content-center ">
+                <div class="col text-center">
+                    <p class="fs-4">現在テレビ電話ができる支援者</p>
+                    <!-- <ul class="list-group mx-auto" style="max-width: 400px;" id="calling"> -->
+                    <!-- </ul> -->
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row justify-content-center ">
-            <div class="col text-center">
-                <p class="fs-4">現在テレビ電話ができる支援者</p>
-                <!-- <ul class="list-group mx-auto" style="max-width: 400px;" id="calling"> -->
-                <!-- </ul> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col d-none text-center my-3">
+                    <p id="my-id"></p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col d-none text-center my-3">
-                <p id="my-id"></p>
+        <select class="form-select mx-auto bg-success bg-opacity-25 " size="3" aria-label="size 3 select example" style="max-width: 400px;" id="their-id"></select>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center my-5">
+                    <button type="button" class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px" id="make-call">発 信</button>
+                </div>
             </div>
         </div>
-    </div>
-    <select class="form-select mx-auto bg-success bg-opacity-25 " size="3" aria-label="size 3 select example" style="max-width: 400px;" id="their-id"></select>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center my-5">
-                <button type="button" class="btn btn-outline-success btn-lg fs-5" style="width: 200px;;height:50px" id="make-call">発 信</button>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center my-5">
+                    <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="member_kaiwa.php" role="button">友達と話すへ</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="member_kaiwa.php" role="button">友達と話すへ</a>
-            </div>
-        </div>
-    </div>
+    </main>
     <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
         <div class="container">
             <p>&copy;2022 syndy </p>
@@ -208,6 +227,7 @@ $sien = json_encode($output);
 
         //PeerIDlist
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>

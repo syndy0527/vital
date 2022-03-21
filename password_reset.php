@@ -14,17 +14,33 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-dark bg-warning bg-opacity-75">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-warning bg-opacity-75">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
+                    <img src="img/comictlogo.png" alt="" width="250" height="60" class="d-inline-block align-text-top">
                 </a>
-                <form class="d-flex fs-4">
-                    <a class="btn btn-outline-danger fs-4 mx-4" href="login.php" role="button">ログイン</a>
-                    <a class="btn btn-outline-danger fs-4 " href="register.php" role="button">新規登録</a>
-                </form>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger text-decoration-underline fw-bold fs-4" href="register.php">新規登録</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger text-decoration-underline fw-bold fs-4 " href="login.php">ログイン</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
         </nav>
     </header>
     <main>
@@ -71,6 +87,7 @@
             <p>&copy;2022 syndy </p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
         function setConfirmMessage(confirm_password) {
             let password = document.getElementById("new_password").value;

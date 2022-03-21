@@ -16,47 +16,66 @@ check_session_id();
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-primary bg-opacity-25">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-opacity-25">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="img/comictlogo.png" alt="" width="250" height="60" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold fs-4" href="#">支援者:<?= $_SESSION['mbname'] ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-secondary text-white fs-5 " href="logout.php" role="button">ログアウト</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="mb-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
-
-                <form class="d-flex fs-4">
-                    <span class="navbar-text h5 ">
-                        支援者:<?= $_SESSION['mbname'] ?>
-                    </span>
-                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
-                </form>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row justify-content-center ">
-            <div class="col text-center my-5">
-                <p class="h2">ー 見守り情報 ー</p>
+            <div class="row justify-content-center ">
+                <div class="col text-center my-5">
+                    <p class="h2">ー 見守り情報 ー</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center  ">
-            <div class="col text-center my-5">
-                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="sien_mimamori_select.php" role="button">見守り情報照会</a>
+        <div class="container-fluid">
+            <div class="row justify-content-center  ">
+                <div class="col text-center my-4">
+                    <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="sien_mimamori_select.php" role="button">見守り情報照会</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center my-5">
-                <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="" role="button">見守り情報入力</a>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center my-4">
+                    <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="" role="button">見守り情報入力</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center my-5">
-                <a class="btn btn-secondary btn-lg fs-5" style="width: 150px;;height:50px" href="sien_home.php" role="button">支援者ホームへ</a>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col text-center my-5">
+                    <a class="btn btn-secondary btn-lg fs-5" style="width: 200px;;height:50px" href="sien_home.php" role="button">支援者ホームへ</a>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
     <footer class="footer fixed-bottom mt-auto py-2 bg-secondary text-light text-center fs-5 ">
         <div class="container">
             <p>&copy;2022 syndy </p>

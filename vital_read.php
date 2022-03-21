@@ -6,7 +6,6 @@ check_session_id();
 $memberid = $_SESSION['member_id'];
 // DB接続
 $pdo = connect_to_db();
-
 $sql = 'SELECT * FROM vital_table WHERE member_id=:memberid';
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':memberid', $memberid, PDO::PARAM_STR);
@@ -51,17 +50,32 @@ foreach ($val as $record) {
 
 <body>
     <header>
-        <nav class="navbar navbar-light bg-danger bg-opacity-25">
+        <nav class="navbar navbar-expand-lg navbar-light bg-danger bg-opacity-25">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
-
-                    <form class="d-flex fs-4">
-                        <span class="navbar-text h5 ">
-                            利用者:<?= $_SESSION['mbname'] ?>
-                        </span>
-                        <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
-                    </form>
+                    <img src="img/comictlogo.png" alt="" width="250" height="60" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold fs-4" href="#">利用者:<?= $_SESSION['mbname'] ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-secondary text-white fs-5 " href="logout.php" role="button">ログアウト</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -145,6 +159,7 @@ foreach ($val as $record) {
             <p>&copy;2022 syndy </p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
     <script>
         let data_array = <?php echo json_encode($val); ?>;
@@ -302,7 +317,7 @@ foreach ($val as $record) {
             data: {
                 labels: date_array,
                 datasets: [{
-                    label: '水分量',
+                    label: '水分量(ml)',
                     data: suibun_array,
                     borderColor: "rgba(58,172,173,1)",
                     backgroundColor: "rgba(0,0,0,0)"
