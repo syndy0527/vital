@@ -58,7 +58,7 @@ check_session_id();
         <div class="container-fluid">
             <div class="row justify-content-center  ">
                 <div class="col text-center my-4 align-items-center">
-                    <a class="btn btn-outline-danger rounded-pill btn-lg fs-3 " style="width: 300px;;height:70px" href="member_kaiwa.php" role="button">テレビ電話</a>
+                    <a class="btn btn-outline-danger rounded-pill btn-lg fs-3" style="width: 300px;;height:70px" href="member_kaiwa.php" role="button">テレビ電話</a>
                 </div>
             </div>
         </div>

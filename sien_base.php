@@ -90,19 +90,6 @@ foreach ($result as $record2) {
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-primary bg-opacity-25">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/comictlogo.png" alt="" width="300" height="60" class="d-inline-block align-text-top">
-
-                <form class="d-flex fs-4">
-                    <span class="navbar-text h5 ">
-                        支援者:<?= $_SESSION['mbname'] ?>
-                    </span>
-                    <a class="btn btn-secondary" href="logout.php" role="button">ログアウト</a>
-                </form>
-        </div>
-    </nav>
     <form action="sien_create.php" method="POST">
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-opacity-25">

@@ -19,14 +19,14 @@ margin-bottom: 10%;
 display: none;
 }
 h2 {
-font-size: 3rem;
+font-size: 2rem;
 }
 p {
-font-size: 1.7rem;
+font-size: 1.3rem;
 margin-top: 20px;
 }
 a {
-font-size: 1.5rem;
+font-size: 1.3rem;
 background: #0bd;
 border-radius: 5px;
 padding: 10px 20px;
@@ -51,10 +51,95 @@ background-size: cover;
 color: rgba(0,0,0,.7);
 text-align: center;
 display: flex;
+flex-direction: column;
 align-items: center;
 justify-content: center;
 }
 
+/*==================================================
+スライダーのためのcss
+===================================*/
+.slick_wrapper{
+  max-width: 500px;
+}
+.slider {
+    position:relative;
+
+	height: 350px;/*スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+}
+/*　背景画像設定　*/
+
+.slider-item01 {
+    background:url(../img/egao1.jpg);
+    width: 100%;
+}
+
+.slider-item02 {
+    background:url(../img/egao2.jpg);
+    width: 100%;
+}
+
+.slider-item {
+    width: 100%;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+    height:350px;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    background-repeat: no-repeat;/*背景画像をリピートしない*/
+    background-position: center;/*背景画像の位置を中央に*/
+    background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
+}
+
+/*矢印の設定*/
+
+/*戻る、次へ矢印の位置*/
+.slick-prev, 
+.slick-next {
+    position: absolute;/*絶対配置にする*/
+	z-index: 3;
+    top: 42%;
+    cursor: pointer;/*マウスカーソルを指マークに*/
+    outline: none;/*クリックをしたら出てくる枠線を消す*/
+    border-top: 2px solid #ccc;/*矢印の色*/
+    border-right: 2px solid #ccc;/*矢印の色*/
+    height: 25px;
+    width: 25px;
+}
+
+.slick-prev {/*戻る矢印の位置と形状*/
+    left:2.5%;
+    transform: rotate(-135deg);
+}
+
+.slick-next {/*次へ矢印の位置と形状*/
+    right:2.5%;
+    transform: rotate(45deg);
+}
+
+/*ドットナビゲーションの設定*/
+
+.slick-dots {
+	position: relative;
+	z-index: 3;
+    text-align:center;
+	margin:-50px 0 0 0;
+}
+
+.slick-dots li {
+    display:inline-block;
+	margin:0 5px;
+}
+
+.slick-dots button {
+    color: transparent;
+    outline: none;
+    width:8px;/*ドットボタンのサイズ*/
+    height:8px;/*ドットボタンのサイズ*/
+    display:block;
+    border-radius:50%;
+    background:#ccc;/*ドットボタンの色*/
+}
+
+.slick-dots .slick-active button{
+    background:#333;/*ドットボタンの現在地表示の色*/
+}
 
 @media all and (min-width: 500px) {
   .wrapper {

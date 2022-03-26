@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2022-03-21 12:58:34
+-- 生成日時: 2022-03-26 05:10:05
 -- サーバのバージョン： 10.4.22-MariaDB
 -- PHP のバージョン: 8.0.13
 
@@ -227,7 +227,11 @@ INSERT INTO `member_table` (`member_id`, `mbname`, `login_id`, `password`, `is_a
 (30, '田中　順子', 'taju', '111111', 0, 0, '0', '0000-00-00', '0', '2022-02-13 08:16:22', '2022-02-13 08:16:22'),
 (35, 'ayase', 'ayase', '111111', 0, 0, '0', '0000-00-00', '0', '2022-03-12 06:37:40', '2022-03-12 06:37:40'),
 (37, '木村　沙織', 'kimu', '$2y$10$lXSoeUxXxqrKJrY6bgJOQ.iOqVWUc7EqeJdDNIPwfHM6juTWyZM/u', 0, 0, '0', '0000-00-00', '0', '2022-03-17 05:42:39', '2022-03-17 05:43:03'),
-(41, '管理者', 'admn', '$2y$10$9BSeJYqr/wCeqLwPSeb6AukdFXT/rixxvQkhT3ZO.lQZx87WwtP7q', 2, 0, '0', '0000-00-00', '0', '2022-03-17 05:57:30', '2022-03-17 05:57:30');
+(41, '管理者', 'admn', '$2y$10$9BSeJYqr/wCeqLwPSeb6AukdFXT/rixxvQkhT3ZO.lQZx87WwtP7q', 2, 0, '0', '0000-00-00', '0', '2022-03-17 05:57:30', '2022-03-17 05:57:30'),
+(45, 'テスト（利用者）', 'admr', '$2y$10$HjYnT51c3NBLG59uGnnTUeNhOeCmS27e99.iwy46.DfyJjTyXdWWu', 0, 0, '0', '0000-00-00', '0', '2022-03-26 13:02:03', '2022-03-26 13:02:03'),
+(46, 'テスト（支援者）', 'adms', '$2y$10$0r7AoRQh129Nf7L6d4kl7eOamhX33S.HLZSNdOuCXFTqO0dhKESCq', 1, 0, '0', '0000-00-00', '東京都港区', '2022-03-26 13:02:43', '2022-03-26 13:03:19'),
+(47, 'テスト（管理者）', 'admk', '$2y$10$IXvBfvqk3FOhv5.PJCtg8.MUOM6B07DsWVKAOSMhPkf3O7cCZjjDm', 2, 0, '0', '0000-00-00', '0', '2022-03-26 13:05:15', '2022-03-26 13:05:15'),
+(48, 'テスト２（利用者）', 'adme', '$2y$10$QiCZA9jPWQ36ThfF00vZF.u0hV8SMxmsIOa9/42F0IO9BEEbqsH8K', 0, 0, '0', '0000-00-00', '0', '2022-03-26 13:09:33', '2022-03-26 13:09:33');
 
 -- --------------------------------------------------------
 
@@ -559,7 +563,7 @@ ALTER TABLE `medical_table`
 -- テーブルの AUTO_INCREMENT `member_table`
 --
 ALTER TABLE `member_table`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- テーブルの AUTO_INCREMENT `message_relation_table`
